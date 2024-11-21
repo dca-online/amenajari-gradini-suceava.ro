@@ -1,0 +1,16 @@
+# Enable URL rewriting
+RewriteEngine On
+RewriteRule ^index$ index.php [L]
+
+# Force HTTPS (if you are using SSL locally)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Set default index file
+DirectoryIndex index.php index.html
+
+# Block certain file types for security
+FilesMatch .(exeshbatcmd)$
+  Order Deny,Allow
+  Deny from all
+FilesMatch
