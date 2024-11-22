@@ -531,3 +531,7 @@ h6,
 .roundImages {
     border-radius: 25px !important;
 }
+
+.services-size {
+    height: 250px !important;
+}
