@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 
-$jsonFile = 'reviews.json';
+$jsonFile = 'data/reviews.json';
 
 try {
     if (file_exists($jsonFile)) {
