@@ -1,23 +1,14 @@
 <?php
-header('Content-Type: application/json');
+// Place this code from line 1 to the end of getReviews.php
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
+header('Content-Type: application/json');
 
-$jsonFile = 'reviews.json';
+$jsonFile = 'data/reviews.json';
 
-try {
-    if (file_exists($jsonFile)) {
-        $jsonContent = file_get_contents($jsonFile);
-        $reviewsData = json_decode($jsonContent, true);
-        
-        // Get only the latest 10 reviews
-        $latestReviews = array_slice($reviewsData['reviews'], 0, 10);
-        
-        echo json_encode(['status' => 'success', 'data' => $latestReviews]);
-    } else {
-        echo json_encode(['status' => 'success', 'data' => []]);
-    }
-} catch(Exception $e) {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Failed to fetch reviews']);
+if (file_exists($jsonFile)) {
+    $reviews = json_decode(file_get_contents($jsonFile), true);
+    echo json_encode($reviews);
+} else {
+    echo json_encode([]);
 }
+?>
