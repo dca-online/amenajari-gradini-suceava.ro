@@ -9,7 +9,7 @@ ini_set('display_errors', 0);
 error_log("Received request: " . file_get_contents('php://input'));
 
 try {
-    $jsonFile = 'reviews.json';
+    $jsonFile = 'data/reviews.json';
     $input = file_get_contents('php://input');
     
     if (!$input) {
