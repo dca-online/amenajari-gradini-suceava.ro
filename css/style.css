@@ -469,8 +469,8 @@ h6,
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary);
-    background: var(--light);
+    color: #DBE7C9;
+    background: #436850;
     border-radius: 4px;
     font-size: 22px;
     transition: .5s;
@@ -478,8 +478,8 @@ h6,
 
 .testimonial-carousel .owl-nav .owl-prev:hover,
 .testimonial-carousel .owl-nav .owl-next:hover {
-    background: var(--primary);
-    color: var(--light);
+    background: #DBE7C9;
+    color: #436850 !important;
 }
 
 .footer .btn.btn-link {
@@ -524,8 +524,26 @@ h6,
     border-radius: 50px 0px 0px 50px !important;
 }
 
+.btn-roundUp:active {
+    border: 1px #12372A solid;
+    border-radius: 50px 0px 0px 50px !important;
+    background:#D2E3C8;
+    color:#436850;
+}
+
+
 .btn-roundSimple {
     border-radius: 50px !important;
+    color: #ffffff !important;
+    background: #436850 !important;
+}
+
+.btn-roundSimple:hover {
+    border: 0;
+    border-radius: 50px !important;
+    color: #50623A !important;
+    background: #DBE7C9 !important;
+
 }
 
 .roundImages {
@@ -535,3 +553,249 @@ h6,
 .services-size {
     height: 250px !important;
 }
+
+/* Font weights */
+.h1, h2, .h2, .fw-bold {
+    font-weight: 700 !important;
+}
+
+.h3, h4, .h4, .fw-medium {
+    font-weight: 600 !important;
+}
+
+.h5, h6, .h6, .fw-semi-bold {
+    font-weight: 500 !important;
+}
+
+/* Button styles */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn.active {
+    transform: scale(1.02);
+}
+
+.btn-outline-primary:hover {
+    color: var(--light);
+}
+
+.btn-sm-square, .btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+}
+
+/* Navigation styles */
+.navbar a.btn {
+    height: 80px;
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+/* Carousel controls */
+.carousel-control-next {
+    width: 15%;
+}
+
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem;
+    background-color: var(--primary);
+    border: 10px solid var(--primary);
+}
+
+/* Slide animations */
+.slide-left, .slide-right {
+    transition: transform 0.3s ease-in-out;
+}
+
+.slide-left {
+    transform: translateX(-100%);
+}
+
+.slide-right {
+    transform: translateX(100%);
+}
+
+.slide-left.active, .slide-right.active {
+    transform: translateX(0);
+}
+
+.slide-left:not(.active), .slide-right:not(.active) {
+    opacity: 0.7;
+}
+
+/* Review sections */
+.review-container {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.review-container.active {
+    opacity: 1;
+    max-height: 1000px;
+    overflow: visible;
+    min-height: 400px;
+}
+
+#reviews-section, #add-review-section {
+    position: relative;
+    width: 100%;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#reviews-section.active, #add-review-section.active {
+    position: relative;
+    transform: translateY(0);
+}
+
+/* Star rating */
+.star-rating {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.star {
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.star.active, .stars {
+    color: #ffd700;
+}
+
+/* Review controls */
+#review-controls {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    #review-controls .btn {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 575px) {
+    #review-controls .btn {
+        width: 100%;
+    }
+}
+
+/* Testimonial carousel */
+.testimonial-item {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
+}
+
+.testimonial-carousel .owl-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.testimonial-carousel .owl-nav button.owl-prev,
+.testimonial-carousel .owl-nav button.owl-next {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background-color: #436850 !important;
+    border-radius: 50px !important;
+    transition: .5s;
+    margin: 0;
+}
+
+.testimonial-carousel .owl-nav button.owl-prev:hover,
+.testimonial-carousel .owl-nav button.owl-next:hover {
+    background: #436850 !important;
+}
+
+.testimonial-carousel .owl-nav .bi {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Form elements */
+.form-control, .form-select {
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+}
+
+/* Add Review Button */
+#addReview {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 25px;
+    width: auto;
+    border: 1px #50623A solid;
+    color: #50623A !important;
+    border-radius: 50px !important;
+}
+
+#addReview:hover {
+    background: #DBE7C9 !important;
+    border-width: 1px;
+}
+
+#addReview:active {
+    background: #DBE7C9 !important;
+}
+
+#addReview:focus-within {
+    border: 0;
+    color: #ffffff !important;
+    background: #789461 !important;
+}
+
+#addReview.text-switching {
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    border-color: transparent;
+}
+
+/* Container transitions */
+.container-xxl {
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 2rem;
+}
+
+.owl-carousel {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.active .owl-carousel {
+    opacity: 1;
+}
+
+#review-form {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+

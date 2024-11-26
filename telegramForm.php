@@ -11,7 +11,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 if (!isset($data['name']) || !isset($data['email']) || 
     !isset($data['phone']) || !isset($data['service']) || 
-    !isset($data['message'])) {
+    !isset($data['city']) || !isset($data['message'])) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Missing required fields']);
     exit;
@@ -21,13 +21,15 @@ $name = htmlspecialchars($data['name']);
 $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $phone = htmlspecialchars($data['phone']);
 $service = htmlspecialchars($data['service']);
+$city = htmlspecialchars($data['city']);
 $message = htmlspecialchars($data['message']);
 
-$telegramMessage = "🌿 Nouă cerere de la Gazon A-Z! 🌿\n\n" .
+$telegramMessage = "🌿 Nouă cerere de la un client! 🌿\n\n" .
                    "👤 Nume: $name\n" .
                    "✉️ Email: $email\n" .
                    "📱 Telefon: $phone\n" .
-                   "🌱 Serviciu dorit: $service\n\n" .
+                   "🌱 Serviciu dorit: $service\n" .
+                   "🏘️ Oraș: $city\n\n" .
                    "💬 Mesaj:\n$message";
 
 $website = "https://api.telegram.org/bot$botToken/sendMessage";

@@ -408,6 +408,55 @@
                                     <label for="cage">Serviciu dorit</label>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <select class="form-control bg-light border-0" id="city" required>
+                            <option value="">Selectează locația</option>
+                                <option value="Alba Iulia">Alba Iulia</option>
+                                <option value="Alexandria">Alexandria</option>
+                                <option value="Arad">Arad</option>
+                                <option value="Bacău">Bacău</option>
+                                <option value="Baia Mare">Baia Mare</option>
+                                <option value="Bistrița">Bistrița</option>
+                                <option value="Botoșani">Botoșani</option>
+                                <option value="Brăila">Brăila</option>
+                                <option value="Brașov">Brașov</option>
+                                <option value="București">București</option>
+                                <option value="Buzău">Buzău</option>
+                                <option value="Călărași">Călărași</option>
+                                <option value="Cluj-Napoca">Cluj-Napoca</option>
+                                <option value="Constanța">Constanța</option>
+                                <option value="Craiova">Craiova</option>
+                                <option value="Deva">Deva</option>
+                                <option value="Drobeta-Turnu Severin">Drobeta-Turnu Severin</option>
+                                <option value="Focșani">Focșani</option>
+                                <option value="Galați">Galați</option>
+                                <option value="Giurgiu">Giurgiu</option>
+                                <option value="Iași">Iași</option>
+                                <option value="Miercurea Ciuc">Miercurea Ciuc</option>
+                                <option value="Oradea">Oradea</option>
+                                <option value="Piatra Neamț">Piatra Neamț</option>
+                                <option value="Pitești">Pitești</option>
+                                <option value="Ploiești">Ploiești</option>
+                                <option value="Râmnicu Vâlcea">Râmnicu Vâlcea</option>
+                                <option value="Reșița">Reșița</option>
+                                <option value="Satu Mare">Satu Mare</option>
+                                <option value="Sfântu Gheorghe">Sfântu Gheorghe</option>
+                                <option value="Sibiu">Sibiu</option>
+                                <option value="Slatina">Slatina</option>
+                                <option value="Slobozia">Slobozia</option>
+                                <option value="Suceava">Suceava</option>
+                                <option value="Târgoviște">Târgoviște</option>
+                                <option value="Târgu Jiu">Târgu Jiu</option>
+                                <option value="Târgu Mureș">Târgu Mureș</option>
+                                <option value="Timișoara">Timișoara</option>
+                                <option value="Tulcea">Tulcea</option>
+                                <option value="Vaslui">Vaslui</option>
+                                <option value="Zalău">Zalău</option>
+                        </select>
+                        <label for="city">Oraș</label>
+                    </div>
+                </div>
                             <div class="col-12">
                                 <div class="form-floating">
                                     <textarea class="form-control bg-light border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
@@ -526,6 +575,147 @@
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="fs-5 fw-bold text-primary">Review-urile clienților</p>
                     <h1 class="display-5 mb-5">Ce spun clienții despre noi</h1>
+                    <div id="review-controls" class="d-flex gap-3">
+                        <button href="#" id="showReviews" class="btn-roundSimple btn btn-primary py-sm-3 px-sm-4 rounded-0 active">Vezi review-uri</button>
+                        <button id="addReview" class=" #addReview btn py-sm-3 px-sm-4 rounded-0 active">Adaugă Review</button>
+                    </div>
+                </div>
+
+            <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.5s">
+
+                <div id="reviews-section" class="review-container active">
+                    <div class="owl-carousel button.owl-prev button.owl-next testimonial-carousel">
+  
+                        <div class="testimonial-item bg-white rounded p-4 p-sm-5">
+                            <div class="stars mb-2">
+                                ★★★★★
+                            </div>
+                            <p class="fs-5">"Servicii excelente de amenajare. Echipa a fost foarte profesionistă!"</p>
+                            <h4>Ioan Popescu</h4>
+                            <span>București</span>
+                            <span>·</span>
+                            <small class="text-muted">Amenajare Grădină</small>
+                        </div>
+                        <div class="testimonial-item bg-white rounded p-4 p-sm-5">
+                            <div class="stars mb-2">
+                                ★★★★☆
+                            </div>
+                            <p class="fs-5">"Foarte mulțumit de rezultatul final. Recomand cu încredere!"</p>
+                            <h4>Maria Ionescu</h4>
+                            <span>Cluj-Napoca</span>
+                            <span>·</span>
+                            <small class="text-muted">Instalare Gazon</small>
+                        </div>
+                        <div class="testimonial-item bg-white rounded p-4 p-sm-5">
+                            <div class="stars mb-2">
+                                ★★★★★
+                            </div>
+                            <p class="fs-5">"Echipă serioasă și punctuală. Rezultate peste așteptări!"</p>
+                            <h4>Alexandru Munteanu</h4>
+                            <span>Iași</span>
+                            <span>·</span>
+                            <small class="text-muted">Amenajare Completă</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="add-review-section" class="review-container">
+                    <form id="review-form" class="bg-white rounded p-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control bg-light border-0" id="reviewName" required>
+                            <label for="reviewName">Nume</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select bg-light border-0" id="reviewService" required>
+                                <option value="">Selectează serviciul</option>
+                                <option value="amenajare">Peisagistică</option>
+                                <option value="gazon">Mentenață grădină</option>
+                                <option value="completa">Mentenanță plante</option>
+                                <option value="completa">Irigare și drenaj</option>
+                                <option value="completa">Tehnologii de grădină</option>
+                                <option value="completa">Grădinărit și Peisagistică urbană</option>
+                            </select>
+                            <label for="reviewService">Serviciu</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control bg-light border-0" id="reviewTitle" required>
+                            <label for="reviewTitle">Titlu Review</label>
+                        </div>
+                        <div class="star-rating mb-3">
+                            <span class="star" data-rating="1">☆</span>
+                            <span class="star" data-rating="2">☆</span>
+                            <span class="star" data-rating="3">☆</span>
+                            <span class="star" data-rating="4">☆</span>
+                            <span class="star" data-rating="5">☆</span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select bg-light border-0" id="reviewCity" required>
+                                <option value="">Selectează locația</option>
+                                <option value="Alba Iulia">Alba Iulia</option>
+                                <option value="Alexandria">Alexandria</option>
+                                <option value="Arad">Arad</option>
+                                <option value="Bacău">Bacău</option>
+                                <option value="Baia Mare">Baia Mare</option>
+                                <option value="Bistrița">Bistrița</option>
+                                <option value="Botoșani">Botoșani</option>
+                                <option value="Brăila">Brăila</option>
+                                <option value="Brașov">Brașov</option>
+                                <option value="București">București</option>
+                                <option value="Buzău">Buzău</option>
+                                <option value="Călărași">Călărași</option>
+                                <option value="Cluj-Napoca">Cluj-Napoca</option>
+                                <option value="Constanța">Constanța</option>
+                                <option value="Craiova">Craiova</option>
+                                <option value="Deva">Deva</option>
+                                <option value="Drobeta-Turnu Severin">Drobeta-Turnu Severin</option>
+                                <option value="Focșani">Focșani</option>
+                                <option value="Galați">Galați</option>
+                                <option value="Giurgiu">Giurgiu</option>
+                                <option value="Iași">Iași</option>
+                                <option value="Miercurea Ciuc">Miercurea Ciuc</option>
+                                <option value="Oradea">Oradea</option>
+                                <option value="Piatra Neamț">Piatra Neamț</option>
+                                <option value="Pitești">Pitești</option>
+                                <option value="Ploiești">Ploiești</option>
+                                <option value="Râmnicu Vâlcea">Râmnicu Vâlcea</option>
+                                <option value="Reșița">Reșița</option>
+                                <option value="Satu Mare">Satu Mare</option>
+                                <option value="Sfântu Gheorghe">Sfântu Gheorghe</option>
+                                <option value="Sibiu">Sibiu</option>
+                                <option value="Slatina">Slatina</option>
+                                <option value="Slobozia">Slobozia</option>
+                                <option value="Suceava">Suceava</option>
+                                <option value="Târgoviște">Târgoviște</option>
+                                <option value="Târgu Jiu">Târgu Jiu</option>
+                                <option value="Târgu Mureș">Târgu Mureș</option>
+                                <option value="Timișoara">Timișoara</option>
+                                <option value="Tulcea">Tulcea</option>
+                                <option value="Vaslui">Vaslui</option>
+                                <option value="Zalău">Zalău</option>
+                            </select>
+                            <label for="reviewCity">Oraș</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control bg-light border-0" id="reviewMessage" style="height: 100px" required></textarea>
+                            <label for="reviewMessage">Mesajul tău</label>
+                        </div>
+                        <div class="text-center mt-4">
+                        <button type="submit" class="btn-roundSimple btn btn-primary py-sm-3 px-sm-4 rounded-0 active">Trimite</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="fs-5 fw-bold text-primary">Review-urile clienților</p>
+                    <h1 class="display-5 mb-5">Ce spun clienții despre noi</h1>
                     <p class="mb-4"></p>
                     <a class="btn-roundSimple btn btn-primary py-3 px-4" href="testimonial.html">Vezi mai multe</a>
                 </div>
@@ -547,7 +737,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div id="Contact" class="container py-5">
