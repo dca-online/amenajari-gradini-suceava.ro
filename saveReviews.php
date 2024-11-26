@@ -1,30 +1,66 @@
 <?php
-// Place this code from line 1 to the end of saveReviews.php
-header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
-$directory = 'data';
-if (!file_exists($directory)) {
-    mkdir($directory, 0777, true);
-}
-
+// Get the JSON file path
 $jsonFile = 'data/reviews.json';
 
-// Get the review data
-$reviewData = json_decode(file_get_contents('php://input'), true);
+// Get and validate input data
+$data = json_decode(file_get_contents('php://input'), true);
 
-// Read existing reviews
-$reviews = [];
-if (file_exists($jsonFile)) {
-    $reviews = json_decode(file_get_contents($jsonFile), true);
+if (!isset($data['name']) || !isset($data['service']) || 
+    !isset($data['title']) || !isset($data['rating']) || 
+    !isset($data['city']) || !isset($data['message'])) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Missing required fields']);
+    exit;
 }
 
-// Add new review
-$reviews[] = $reviewData;
+// Sanitize inputs
+$review = [
+    'name' => htmlspecialchars($data['name']),
+    'service' => htmlspecialchars($data['service']),
+    'title' => htmlspecialchars($data['title']),
+    'rating' => intval($data['rating']),
+    'city' => htmlspecialchars($data['city']),
+    'message' => htmlspecialchars($data['message']),
+    'date' => date('Y-m-d H:i:s')
+];
 
-// Save back to file
-file_put_contents($jsonFile, json_encode($reviews, JSON_PRETTY_PRINT));
-chmod($jsonFile, 0777);
+// Validate rating
+if ($review['rating'] < 1 || $review['rating'] > 5) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid rating']);
+    exit;
+}
 
-echo json_encode(['success' => true]);
-?>
+try {
+    // Read existing reviews
+    if (file_exists($jsonFile)) {
+        $jsonContent = file_get_contents($jsonFile);
+        $reviewsData = json_decode($jsonContent, true);
+    } else {
+        $reviewsData = ['reviews' => []];
+    }
+
+    // Add new review
+    array_unshift($reviewsData['reviews'], $review); // Add to beginning of array
+
+    // Keep only the latest 100 reviews
+    if (count($reviewsData['reviews']) > 100) {
+        array_pop($reviewsData['reviews']);
+    }
+
+    // Save back to file
+    if (file_put_contents($jsonFile, json_encode($reviewsData, JSON_PRETTY_PRINT))) {
+        http_response_code(200);
+        echo json_encode(['status' => 'success', 'message' => 'Review added successfully']);
+    } else {
+        throw new Exception('Failed to save review');
+    }
+} catch(Exception $e) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Failed to save review']);
+}
