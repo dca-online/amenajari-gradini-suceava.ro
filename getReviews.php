@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 
 
-chmod('data/reviews.json', 0666);
+chmod('reviews.json', 0666);
 
 $file_path = 'data/reviews.json';
 
