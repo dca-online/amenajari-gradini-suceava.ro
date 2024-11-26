@@ -4,10 +4,11 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-chmod('reviews.json', 0666);
+$jsonFile = __DIR__ . '/reviews.json';
 
-// Get the JSON file path
-$jsonFile = 'reviews.json';
+if (file_exists($jsonFile)) {
+    chmod($jsonFile, 0666);
+}
 
 // Get and validate input data
 $data = json_decode(file_get_contents('php://input'), true);

@@ -3,10 +3,11 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 
+$jsonFile = __DIR__ . '/reviews.json';
 
-chmod('reviews.json', 0666);
-
-$jsonFile = 'reviews.json';
+if (file_exists($jsonFile)) {
+    chmod($jsonFile, 0666);
+}
 
 try {
     if (file_exists($jsonFile)) {
