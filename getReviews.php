@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET');
 
 chmod('reviews.json', 0666);
 
-$file_path = 'data/reviews.json';
+$jsonFile = 'reviews.json';
 
 try {
     if (file_exists($jsonFile)) {

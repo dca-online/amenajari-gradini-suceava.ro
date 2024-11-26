@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 chmod('reviews.json', 0666);
 
 // Get the JSON file path
-$file_path = 'data/reviews.json';
+$jsonFile = 'reviews.json';
 
 // Get and validate input data
 $data = json_decode(file_get_contents('php://input'), true);
