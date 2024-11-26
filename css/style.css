@@ -799,3 +799,6 @@ h6,
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
+.mock-reviews {
+    display: none !important;
+}

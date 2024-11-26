@@ -1,3 +1,13 @@
 {
-    "reviews": []
+    "reviews": [
+        {
+            "name": "Test",
+            "service": "Tehnologii de gr\u0103din\u0103",
+            "title": "Test",
+            "rating": 5,
+            "city": "Vaslui",
+            "message": "Test",
+            "date": "2024-11-26 20:45:54"
+        }
+    ]
 }

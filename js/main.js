@@ -179,6 +179,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+let currentRating = 0;
+let isSubmitting = false;
+let previousReviewCount = 0;
+let checkInterval;
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
@@ -187,7 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewsSection = document.getElementById('reviews-section');
     const addReviewSection = document.getElementById('add-review-section');
     const stars = document.querySelectorAll('.star');
-    let currentRating = 0;
+
+    loadReviews();
 
     // Focus handling for addReviewBtn
     addReviewBtn.addEventListener('focusout', () => {
@@ -234,7 +240,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event Listeners for section toggling
-    showReviewsBtn.addEventListener('click', () => toggleSections(true));
+    showReviewsBtn.addEventListener('click', () => {
+        toggleSections(true);
+        const addReviewButton = document.getElementById('addReview');
+        if (addReviewButton.textContent === 'Înapoi') {
+            animateButtonText(addReviewButton);
+        }
+    });
     
     addReviewBtn.addEventListener('click', function() {
         animateButtonText(this);
@@ -267,6 +279,65 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     
+document.getElementById('review-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!currentRating || currentRating === 0) {
+        alert('Vă rugăm să selectați un rating');
+        return;
+    }
+    
+    const formData = {
+        name: document.getElementById('reviewName').value,
+        service: document.getElementById('reviewService').value,
+        title: document.getElementById('reviewTitle').value,
+        rating: currentRating,
+        city: document.getElementById('reviewCity').value,
+        message: document.getElementById('reviewMessage').value
+    };
+    
+    fetch('saveReviews.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        // First check if the response is actually JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new TypeError('Server sent non-JSON response');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === 'success') {
+            if (confirm('Review-ul a fost trimis cu succes!')) {
+                document.getElementById('review-form').reset();
+                document.querySelectorAll('.star').forEach(star => {
+                    star.textContent = '☆';
+                });
+                currentRating = 0;
+                
+                const mockReviews = document.querySelector('.mock-reviews');
+                if (mockReviews) {
+                    mockReviews.style.display = 'none';
+                }
+                
+                toggleSections(true);
+                animateButtonText(document.getElementById('addReview'));
+                loadReviews();
+            }
+        } else {
+            throw new Error(data.message || 'Unknown error occurred');
+        }
+    })
+    .catch(error => {
+        console.error('Error details:', error);
+        alert('A apărut o eroare la salvarea review-ului. Vă rugăm să încercați din nou.');
+    });
+
         // Section transition with improved animation
         if (reviewsSection.classList.contains('active')) {
             requestAnimationFrame(() => {
@@ -336,6 +407,15 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('review-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
+    if (isSubmitting) return;
+    
+    if (!currentRating || currentRating === 0) {
+        alert('Vă rugăm să selectați un rating');
+        return;
+    }
+    
+    isSubmitting = true;
+
     const formData = {
         name: document.getElementById('reviewName').value,
         service: document.getElementById('reviewService').value,
@@ -344,33 +424,52 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
         city: document.getElementById('reviewCity').value,
         message: document.getElementById('reviewMessage').value
     };
+
+    const reviewHTML = `
+    <div class="testimonial-item bg-white rounded p-4 p-sm-5">
+        <div class="stars mb-2">
+            ${getStarRating(formData.rating)}
+        </div>
+        <p class="fs-5">"${formData.message}"</p>
+        <h4>${formData.name}</h4>
+        <span>${formData.city}</span>
+        <span>·</span>
+        <small class="text-muted">${formData.service}</small>
+    </div>
+`;
+
+$('.testimonial-carousel').trigger('add.owl.carousel', [reviewHTML]);
+$('.testimonial-carousel').trigger('refresh.owl.carousel');
+
+
     
-    fetch('saveReview.php', {
+    fetch('saveReviews.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => Promise.reject(err));
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.status === 'success') {
             alert('Review-ul a fost trimis cu succes!');
             document.getElementById('review-form').reset();
-            // Reset star rating
             document.querySelectorAll('.star').forEach(star => {
                 star.textContent = '☆';
             });
             currentRating = 0;
-            // Refresh reviews display
             loadReviews();
-        } else {
-            alert('Eroare la trimitere: ' + data.message);
         }
     })
     .catch(error => {
         console.error('Eroare:', error);
-        alert('A apărut o eroare. Vă rugăm să încercați din nou.');
+        alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
     });
 });
 
@@ -379,11 +478,18 @@ function loadReviews() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                const currentCount = data.data.length;
                 const reviewsContainer = document.querySelector('.testimonial-carousel');
+
+                // Destroy and remove existing carousel elements
+                $('.testimonial-carousel').owlCarousel('destroy');
+                $('.owl-nav').remove();
+
+                // Populate the reviews container with real reviews
                 reviewsContainer.innerHTML = data.data.map(review => `
                     <div class="testimonial-item bg-white rounded p-4 p-sm-5">
                         <div class="stars mb-2">
-                            ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                            ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
                         </div>
                         <p class="fs-5">"${review.message}"</p>
                         <h4>${review.name}</h4>
@@ -392,19 +498,46 @@ function loadReviews() {
                         <small class="text-muted">${review.service}</small>
                     </div>
                 `).join('');
-                
-                // Reinitialize the carousel if you're using one
+
+                // Initialize the carousel with the new reviews
                 $('.testimonial-carousel').owlCarousel({
+                    autoplay: true,
+                    smartSpeed: 1000,
                     items: 1,
+                    dots: false,
                     loop: true,
-                    margin: 10,
                     nav: true,
-                    autoplay: true
+                    navText: [
+                        '<i class="bi bi-chevron-left"></i>',
+                        '<i class="bi bi-chevron-right"></i>'
+                    ]
                 });
+
+                // Conditionally show/hide mock reviews
+                const mockReviews = document.querySelector('.mock-reviews');
+                if (mockReviews) {
+                    mockReviews.style.display = currentCount > 0 ? 'none' : 'block'; // Hide if real reviews exist
+                }
             }
         })
         .catch(error => console.error('Error loading reviews:', error));
 }
-
 // Load reviews when page loads
 document.addEventListener('DOMContentLoaded', loadReviews);
+document.getElementById('showReviews').addEventListener('click', function() {
+    document.getElementById('reviews-section').style.display = 'block';
+    document.getElementById('add-review-section').style.display = 'none';
+    loadReviews(); // Reload reviews when switching to reviews section
+    checkInterval = setInterval(loadReviews, 3000);
+    window.addEventListener('beforeunload', () => {
+        if (checkInterval) {
+            clearInterval(checkInterval);
+        }
+    });
+});
+
+document.getElementById('addReview').addEventListener('click', function() {
+    document.getElementById('add-review-section').style.display = 'block';
+    document.getElementById('reviews-section').style.display = 'none';
+})
+});

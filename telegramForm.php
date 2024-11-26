@@ -4,8 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-$botToken = getenv('BOT_TOKEN');
-$chatId = getenv('CHAT_ID');
+$botToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
+$chatId = "5269217303";
 
 $data = json_decode(file_get_contents('php://input'), true);
 
