@@ -796,21 +796,31 @@ h6,
     display: none !important;
 }
 
-html {
-    overflow-y: scroll;
-    margin-right: calc(-1 * (100vw - 100%));
-}
-
-body {
+html, body {
     width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
 }
 
 .container-fluid {
-    width: 100vw;
+    max-width: 100vw;
+    width: 100%;
     margin: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    width: 100vw;
+    margin-left: calc((100% - 100vw)/2);
+    margin-right: calc((100% - 100vw)/2);
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        max-width: 100%;
+        padding: 0;
+    }
 }
