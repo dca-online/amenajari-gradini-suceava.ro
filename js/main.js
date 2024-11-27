@@ -14,6 +14,16 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 const db = firebase.database();
+
+db.ref('test').set({
+    test: 'test'
+})
+.then(() => {
+    console.log('Database write permission confirmed');
+})
+.catch(error => {
+    console.error('Database permission error:', error);
+});
  
 function getStarRating(rating) {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -410,6 +420,7 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
         <div class="stars mb-2">
             ${getStarRating(formData.rating)}
         </div>
+        <h3 class="mb-3">${formData.title}</h3>
         <p class="fs-5">"${formData.message}"</p>
         <h4>${formData.name}</h4>
         <span>${formData.city}</span>
@@ -467,8 +478,9 @@ function loadReviews() {
                 <div class="stars mb-2">
                     ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
                 </div>
-                <p class="fs-5">"${review.message}"</p>
                 <h4>${review.name}</h4>
+                <h3 class="mb-3">${review.title}</h3>
+                <p class="fs-5">"${review.message}"</p>
                 <span>${review.city}</span>
                 <span>·</span>
                 <small class="text-muted">${review.service}</small>
