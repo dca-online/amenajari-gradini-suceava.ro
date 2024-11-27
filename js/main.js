@@ -173,9 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
+            mode: 'cors',
             body: JSON.stringify(formData)
         })
+        
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
