@@ -839,3 +839,35 @@ html, body {
         padding-left: 0 !important;
     }
 }
+
+@media (min-width: 992px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
+    .navbar {
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .container-fluid {
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        padding: 0;
+    }
+
+    .carousel-inner {
+        width: 100vw;
+        left: 50%;
+        transform: translateX(-50%);
+        position: relative;
+    }
+    
+    #splash-container {
+        width: 100vw;
+        overflow: hidden;
+    }
+}
