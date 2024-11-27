@@ -10,9 +10,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const db = firebase.database();
-
  
 function getStarRating(rating) {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -421,29 +422,33 @@ $('.testimonial-carousel').trigger('add.owl.carousel', [reviewHTML]);
 $('.testimonial-carousel').trigger('refresh.owl.carousel');
     
 db.ref('reviews').push(formData)
-.then(() => {
-    alert('Review-ul a fost trimis cu succes!');
-    document.getElementById('review-form').reset();
-    document.querySelectorAll('.star').forEach(star => {
-        star.textContent = '☆';
+    .then(() => {
+        alert('Review-ul a fost trimis cu succes!');
+        document.getElementById('review-form').reset();
+        document.querySelectorAll('.star').forEach(star => {
+            star.textContent = '☆';
+        });
+        currentRating = 0;
+        isSubmitting = false;
+        
+        const mockReviews = document.querySelector('.mock-reviews');
+        if (mockReviews) {
+            mockReviews.style.display = 'none';
+        }
+        
+        toggleSections(true);
+        animateButtonText(document.getElementById('addReview'));
+        loadReviews();
+    })
+    .catch(error => {
+        console.error('Eroare:', error);
+        if (error.code === 'PERMISSION_DENIED') {
+            alert('Nu aveți permisiunea de a adăuga review-uri. Vă rugăm să vă autentificați.');
+        } else {
+            alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
+        }
+        isSubmitting = false;
     });
-    currentRating = 0;
-    isSubmitting = false;
-    
-    const mockReviews = document.querySelector('.mock-reviews');
-    if (mockReviews) {
-        mockReviews.style.display = 'none';
-    }
-    
-    toggleSections(true);
-    animateButtonText(document.getElementById('addReview'));
-    loadReviews();
-})
-.catch(error => {
-    console.error('Eroare:', error);
-    alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
-    isSubmitting = false;
-});
 });
 
 function loadReviews() {
