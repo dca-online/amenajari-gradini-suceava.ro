@@ -5,7 +5,9 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "js/firebase-init.local.js"
+      "js/firebase-init.local.js",
+      "js/firebase-init.js.example",
+      "README.md"
     ]
   }
 }

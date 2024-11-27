@@ -1,8 +1,7 @@
 function getStarRating(rating) {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
 }
-    
-
+ 
 db.ref('test').set({
     test: 'test'
 })
@@ -12,7 +11,6 @@ db.ref('test').set({
 .catch(error => {
     console.error('Database permission error:', error);
 });
- 
 
 (function ($) {
     "use strict";
