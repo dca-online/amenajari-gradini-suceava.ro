@@ -13,6 +13,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+ 
+function getStarRating(rating) {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+    
+
 (function ($) {
     "use strict";
 
@@ -346,11 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
- 
-    function getStarRating(rating) {
-        return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-    }
-        
+
     // Star rating functionality
     function highlightStars(rating) {
         stars.forEach(star => {
