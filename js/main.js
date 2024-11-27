@@ -176,7 +176,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.status === 'success') {
                 alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
@@ -191,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
 
 let currentRating = 0;
 let isSubmitting = false;

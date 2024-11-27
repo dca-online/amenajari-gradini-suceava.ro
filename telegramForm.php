@@ -1,43 +1,18 @@
 <?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
-require 'vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 $botToken = getenv('BOT_TOKEN');
 $chatId = getenv('CHAT_ID');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($data['name']) || !isset($data['email']) || 
-    !isset($data['phone']) || !isset($data['service']) || 
-    !isset($data['city']) || !isset($data['message'])) {
-    http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Missing required fields']);
-    exit;
-}
+$telegramMessage = "Mesaj nou:\n"
+    . "Nume: " . $data['name'] . "\n"
+    . "Email: " . $data['email'] . "\n"
+    . "Telefon: " . $data['phone'] . "\n"
+    . "Serviciu: " . $data['service'] . "\n"
+    . "Oras: " . $data['city'] . "\n"
+    . "Mesaj: " . $data['message'];
 
-$name = htmlspecialchars($data['name']);
-$email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-$phone = htmlspecialchars($data['phone']);
-$service = htmlspecialchars($data['service']);
-$city = htmlspecialchars($data['city']);
-$message = htmlspecialchars($data['message']);
-
-$telegramMessage = "🌿 Nouă cerere de la un client! 🌿\n\n" .
-                   "👤 Nume: $name\n" .
-                   "✉️ Email: $email\n" .
-                   "📱 Telefon: $phone\n" .
-                   "🌱 Serviciu dorit: $service\n" .
-                   "🏘️ Oraș: $city\n\n" .
-                   "💬 Mesaj:\n$message";
-
-$website = "https://api.telegram.org/bot$botToken/sendMessage";
+$website = "https://api.telegram.org/bot{$botToken}/sendMessage";
 $payload = [
     'chat_id' => $chatId,
     'text' => $telegramMessage
@@ -69,4 +44,4 @@ if ($response['ok']) {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => $response['description']]);
 }
-?>
+
