@@ -1,11 +1,11 @@
 {
   "hosting": {
-    "site": "proiectbeutesting",
     "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "js/firebase-init.local.js"
     ]
   }
 }

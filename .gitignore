@@ -68,5 +68,7 @@ node_modules/
 # dataconnect generated files
 .dataconnect
 
-firebase-init.js
+js/firebase-init.local.js
+js/firebase-init.prod.js
+
 .env
