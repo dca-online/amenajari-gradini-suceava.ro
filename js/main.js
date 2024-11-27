@@ -154,43 +154,48 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(hideSplashScreen, 2000);
 });
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#estimareForm');
     
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        service: document.getElementById('service').value,
-        city: document.getElementById('city').value,
-        message: document.getElementById('message').value
-    };
-    
-    const functionUrl = 'https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram';
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                city: document.getElementById('city').value,
+                message: document.getElementById('message').value
+            };
+            
+            const functionUrl = 'https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram';
 
-    fetch(functionUrl, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-})
-
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
-            form.reset();
-        } else {
-            throw new Error(data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Eroare:', error);
-        alert('A apărut o eroare. Vă rugăm să încercați din nou.');
-    });
+            fetch(functionUrl, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
+                    form.reset();
+                } else {
+                    throw new Error(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Eroare:', error);
+                alert('A apărut o eroare. Vă rugăm să încercați din nou.');
+            });
+        });
+    }
 });
 
 let currentRating = 0;
