@@ -70,5 +70,5 @@ node_modules/
 
 js/firebase-init.local.js
 js/firebase-init.prod.js
-
+functions/node_modules
 .env

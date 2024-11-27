@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
             message: document.getElementById('message').value
         };
         
-        fetch('telegramForm.php', {
+        fetch('https://us-central1-proiectbeutesting.cloudfunctions.net/sendTelegram', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
