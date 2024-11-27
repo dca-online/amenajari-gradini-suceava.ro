@@ -4,19 +4,9 @@ const fetch = require("node-fetch");
 const functions = require("firebase-functions");
 
 exports.sendTelegram = onRequest({
-  cors: true, // Enable CORS
+  cors: ["https://proiectbeutesting.web.app", "http://localhost:5000"],
+  maxInstances: 10,
 }, async (request, response) => {
-  // Set CORS headers
-  response.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
-  response.set("Access-Control-Allow-Methods", "POST");
-  response.set("Access-Control-Allow-Headers", "Content-Type");
-
-  // Handle preflight requests
-  if (request.method === "OPTIONS") {
-    response.status(204).send("");
-    return;
-  }
-
   const botToken = functions.config().telegram.bot_token;
   const chatId = functions.config().telegram.chat_id;
 
