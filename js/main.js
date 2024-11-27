@@ -154,49 +154,42 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(hideSplashScreen, 2000);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('#estimareForm');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
     
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('gname').value,
-            email: document.getElementById('gmail').value,
-            phone: document.getElementById('cname').value,
-            service: document.getElementById('cage').value,
-            city: document.getElementById('city').value,
-            message: document.getElementById('message').value
-        };
-        
-        fetch('https://us-central1-proiectbeutesting.cloudfunctions.net/sendTelegram', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            mode: 'cors',
-            body: JSON.stringify(formData)
-        })
-        
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status === 'success') {
-                alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
-                form.reset();
-            } else {
-                alert('Eroare la trimitere: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Eroare:', error);
-            alert('A apărut o eroare. Vă rugăm să încercați din nou.');
-        });
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        service: document.getElementById('service').value,
+        city: document.getElementById('city').value,
+        message: document.getElementById('message').value
+    };
+    
+    const functionUrl = 'https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram';
+
+    fetch(functionUrl, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+})
+
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
+            form.reset();
+        } else {
+            throw new Error(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Eroare:', error);
+        alert('A apărut o eroare. Vă rugăm să încercați din nou.');
     });
 });
 
