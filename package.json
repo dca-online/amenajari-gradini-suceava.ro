@@ -3,14 +3,14 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "build": "echo \"No build step required\" && exit 0"
+        "build": "echo \"No build step required\" && exit 0"
     },
     "dependencies": {
-      "firebase": "^9.22.0",
-      "bootstrap": "^5.0.0",
-      "jquery": "^3.4.1",
-      "isotope-layout": "^3.0.6",
-      "owl.carousel": "^2.3.4",
-      "wowjs": "^1.1.3"
+        "bootstrap": "^5.0.0",
+        "firebase": "^11.0.2",
+        "isotope-layout": "^3.0.6",
+        "jquery": "^3.4.1",
+        "owl.carousel": "^2.3.4",
+        "wowjs": "^1.1.3"
     }
-  }
+}
