@@ -9,7 +9,6 @@ const firebaseConfig = {
         measurementId: "G-PW83LJGYLP"
 };
 
-// Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -218,7 +217,7 @@ let checkInterval;
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
+
     const showReviewsBtn = document.getElementById('showReviews');
     const addReviewBtn = document.getElementById('addReview');
     const reviewsSection = document.getElementById('reviews-section');
@@ -227,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadReviews();
 
-    // Focus handling for addReviewBtn
+
     addReviewBtn.addEventListener('focusout', () => {
         addReviewBtn.classList.add('#addReview:focus-within');
     });
@@ -236,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
         addReviewBtn.classList.remove('#addReview:focus-within');
     });
 
-    // Toggle section function
     function toggleSections(showReviews) {
         const fadeOutSection = showReviews ? addReviewSection : reviewsSection;
         const fadeInSection = showReviews ? reviewsSection : addReviewSection;
@@ -260,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Button text animation
     function animateButtonText(button) {
         const newText = button.textContent === 'Adaugă Review' ? 'Înapoi' : 'Adaugă Review';
         button.classList.add('text-switching');
@@ -271,7 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     }
 
-    // Event Listeners for section toggling
     showReviewsBtn.addEventListener('click', () => {
         toggleSections(true);
         const addReviewButton = document.getElementById('addReview');
@@ -285,13 +281,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const newText = button.textContent === 'Adaugă Review' ? 'Înapoi' : 'Adaugă Review';
         animateButtonText(this);
         toggleSections(!reviewsSection.classList.contains('active'));
-        
-        
-        // Add transform to improve performance
+
         button.style.transform = 'translateZ(0)';
         button.classList.add('text-switching');
-        
-        // Break down the animation into more frames
+
         requestAnimationFrame(() => {
             button.style.opacity = '0';
             button.style.transform = 'translateY(-5px) translateZ(0)';
@@ -328,7 +321,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 date: new Date().toISOString()
             };
 
-        // Section transition with improved animation
             if (reviewsSection.classList.contains('active')) {
                 requestAnimationFrame(() => {
                     reviewsSection.style.transform = 'translateY(-20px)';
@@ -364,7 +356,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Star rating functionality
     function highlightStars(rating) {
         stars.forEach(star => {
             const starRating = star.getAttribute('data-rating');
@@ -506,7 +497,7 @@ function loadReviews() {
         }
     });
 }
-// Load reviews when page loads
+
 document.addEventListener('DOMContentLoaded', loadReviews);
 document.getElementById('showReviews').addEventListener('click', function() {
     document.getElementById('reviews-section').style.display = 'block';
