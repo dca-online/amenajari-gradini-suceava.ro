@@ -170,13 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 message: document.getElementById('message').value
             };
             
-            fetch('https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram', {
+            fetch("https://proiectbeutesting.web.app", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                mode: 'cors', // explicitly set CORS mode
-                credentials: 'same-origin',
+                mode: 'cors',
+                credentials: "include",
                 body: JSON.stringify(formData)
             })
             .then(response => {

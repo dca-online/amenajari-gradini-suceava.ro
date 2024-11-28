@@ -5,11 +5,10 @@ const axios = require("axios");
 
 admin.initializeApp();
 
-// Initialize cors middleware with specific options
 const corsHandler = cors({
-  origin: true,
-  methods: ["POST"],
-  allowedHeaders: ["Content-Type"],
+  origin: ["https://proiectbeutesting.web.app", "http://localhost:5000"],
+  methods: ["POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Origin", "X-Requested-With", "Accept"],
   credentials: true,
 });
 
@@ -18,6 +17,14 @@ exports.sendTelegram = functions
     .https.onRequest((req, res) => {
       corsHandler(req, res, async () => {
         try {
+          if (req.method === "OPTIONS") {
+            res.set("Access-Control-Allow-Origin", "req.headers.origin");
+            res.set("Access-Control-Allow-Methods", "POST");
+            res.set("Access-Control-Allow-Headers", "Content-Type");
+            res.set("Access-Control-Allow-Credentials", "true");
+            return res.status(204).send("");
+          }
+
           const {name, email, phone, service, city, message} = req.body;
           const botToken = functions.config().telegram.token;
           const chatId = functions.config().telegram.chatid;
