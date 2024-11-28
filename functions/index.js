@@ -3,27 +3,15 @@ const fetch = require("node-fetch");
 const functions = require("firebase-functions");
 
 
-exports.corsTest = onRequest({
-  region: "europe-west1",
-  memory: "256MiB",
-}, (request, response) => {
-  response.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
-  response.set("Access-Control-Allow-Methods", "POST, OPTIONS");
-  response.set("Access-Control-Allow-Headers", "Content-Type");
-  response.status(204).send("");
-});
-
-
 exports.sendTelegram = onRequest({
-  cors: ["https://proiectbeutesting.web.app"], // Let Firebase handle CORS
-  region: "europe-west1",
+  cors: ["https://proiectbeutesting.web.app"],
   memory: "256MiB",
+  region: "europe-west1",
 }, async (request, response) => {
   if (request.method === "OPTIONS") {
     response.status(204).send("");
     return;
   }
-
 
   const botToken = functions.config().telegram.bot_token;
   const chatId = functions.config().telegram.chat_id;
