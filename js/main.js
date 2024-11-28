@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const functionUrl = 'https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram';
 
             fetch(functionUrl, {
-                method: "GET, POST, OPTIONS",
+                method: "POST",
                 mode: "cors", 
                 cache: "no-cache",
                 headers: {
@@ -181,15 +181,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(formData)
             })
-
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                if (data.status === 'success') {
-                    alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
-                    form.reset();
-                } else {
-                    throw new Error(data.message);
-                }
+                alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
+                form.reset();
             })
             .catch(error => {
                 console.error('Eroare:', error);
