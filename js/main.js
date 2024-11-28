@@ -174,13 +174,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             fetch(functionUrl, {
                 method: 'POST',
-                mode: 'cors',
+                mode: 'no-cors', // Temporarily disable CORS for testing
                 cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             })
+            
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
