@@ -175,9 +175,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                mode: 'cors', // explicitly set CORS mode
+                credentials: 'same-origin',
                 body: JSON.stringify(formData)
             })
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
             .then(data => {
                 alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
                 form.reset();
