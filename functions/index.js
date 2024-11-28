@@ -9,10 +9,6 @@ const bot = new TelegramBot(
     functions.config().telegram.bot_token,
 
     exports.sendTelegram = functions
-        .runWith({
-          timeoutSeconds: 300,
-          memory: "256MB",
-        })
         .region("europe-west1")
         .https.onRequest(
             async (req, res) => {
