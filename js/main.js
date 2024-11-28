@@ -173,11 +173,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const functionUrl = 'https://europe-west1-proiectbeutesting.cloudfunctions.net/sendTelegram';
 
             fetch(functionUrl, {
-                method: 'POST',
-                mode: 'cors', // Temporarily disable CORS for testing
-                cache: 'no-cache',
+                method: "GET, POST, OPTIONS",
+                mode: "cors", 
+                cache: "no-cache",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formData)
             })

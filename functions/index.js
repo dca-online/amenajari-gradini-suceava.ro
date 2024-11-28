@@ -2,12 +2,15 @@ const {onRequest} = require("firebase-functions/v2/https");
 const fetch = require("node-fetch");
 const functions = require("firebase-functions");
 
-
-exports.sendTelegram = onRequest({
+exports.sendTelegram = functions.https.onRequest((req, res) => ({
   cors: ["https://proiectbeutesting.web.app"],
   memory: "256MiB",
   region: "europe-west1",
 }, async (request, response) => {
+  response.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
+  response.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.set("Access-Control-Allow-Headers", "Content-Type");
+
   if (request.method === "OPTIONS") {
     response.status(204).send("");
     return;
@@ -49,4 +52,4 @@ exports.sendTelegram = onRequest({
     console.error("Error sending message:", error);
     response.status(500).send("Error sending message.");
   }
-});
+}));
