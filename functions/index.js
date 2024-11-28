@@ -1,44 +1,44 @@
 const functions = require("firebase-functions");
-const TelegramBot = require("node-telegram-bot-api");
 const admin = require("firebase-admin");
+const cors = require("cors")({origin: true});
+const axios = require("axios");
 
 admin.initializeApp();
 
-const bot = new TelegramBot(
-    process.env.TELEGRAM_BOT_TOKEN ||
-    functions.config().telegram.bot_token,
+exports.sendTelegram = functions
+    .region("europe-west1")
+    .https.onRequest((req, res) => {
+      return cors(req, res, async () => {
+        try {
+          const {name, email, phone, service, city, message} = req.body;
 
-    exports.sendTelegram = functions
-        .region("europe-west1")
-        .https.onRequest(
-            async (req, res) => {
-              res.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
-              res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-              res.set("Access-Control-Allow-Headers", "Content-Type");
+          // Get credentials from environment variables
+          const botToken = functions.config().telegram.token;
+          const chatId = functions.config().telegram.chatid;
 
-              if (req.method === "OPTIONS") {
-                res.status(204).send("");
-                return;
-              }
+          // Format the message
+          const telegramMessage = `🌿 Cerere nouă de la un client: 🌿
+    👤  Nume: ${name}
+    ✉️  Email: ${email}
+    📞  Telefon: ${phone}
+    🌱  Serviciu: ${service}
+    🏙️  Oraș: ${city}
+    📝  Mesaj: ${message}`;
 
-              const data = req.body;
-              const telegramMessage = `🌿 Cerere nouă de la un client: 🌿
-👤  Nume: ${data.name}
-✉️  Email: ${data.email}
-📞  Telefon: ${data.phone}
-🌱  Serviciu: ${data.service}
-🏙️  Oraș: ${data.city}
-📝  Mesaj: ${data.message}`;
+          // Send to Telegram
+          const response = await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            chat_id: chatId,
+            text: telegramMessage,
+          });
 
-              try {
-                await bot.sendMessage(
-                    process.env.TELEGRAM_CHAT_ID ||
-      functions.config().telegram.chat_id,
-                    telegramMessage,
-                );
-                res.status(200).send("Message sent successfully.");
-              } catch (error) {
-                console.error("Error sending message:", error);
-                res.status(500).send("Error sending message.");
-              }
-            }));
+          if (response.status === 200) {
+            res.status(200).send("Message sent successfully to Telegram");
+          } else {
+            throw new Error("Failed to send message to Telegram");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          res.status(500).send("Error sending message to Telegram");
+        }
+      });
+    });

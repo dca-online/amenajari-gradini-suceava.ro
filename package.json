@@ -1,23 +1,26 @@
 {
-    "name": "proiectbeubesting",
-    "version": "1.0.0",
-    "description": "",
+    "name": "functions",
     "scripts": {
-        "build": "echo \"No build step required\" && exit 0"
-    },
-    "dependencies": {
-        "bootstrap": "^5.0.0",
-        "cors": "^2.8.5",
-        "firebase": "^11.0.2",
-        "isotope-layout": "^3.0.6",
-        "jquery": "^3.4.1",
-        "node-telegram-bot-api": "^0.66.0",
-        "owl.carousel": "^2.3.4",
-        "proiectbeubesting": "file:",
-        "proiectBeuTesting": "file:",
-        "wowjs": "^1.1.3"
+        "lint": "eslint .",
+        "serve": "firebase emulators:start --only functions",
+        "shell": "firebase functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
     },
     "engines": {
-        "node": "22"
-    }
+        "node": "18"
+    },
+    "main": "index.js",
+    "dependencies": {
+        "firebase-admin": "^11.x.x",
+        "firebase-functions": "^4.x.x",
+        "functions": "file:",
+        "node-telegram-bot-api": "^0.66.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.15.0",
+        "eslint-config-google": "^0.14.0"
+    },
+    "private": true
 }
