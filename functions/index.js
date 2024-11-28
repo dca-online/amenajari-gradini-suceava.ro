@@ -3,17 +3,18 @@ const logger = require("firebase-functions/logger");
 const fetch = require("node-fetch");
 const functions = require("firebase-functions");
 
+
 exports.sendTelegram = onRequest({
   cors: ["https://proiectbeutesting.web.app"],
   region: "europe-west1",
   memory: "256MiB",
 }, async (request, response) => {
+  response.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
+  response.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  response.set("Access-Control-Allow-Headers", "Content-Type");
+  response.set("Access-Control-Max-Age", "3600");
   if (request.method === "OPTIONS") {
-    response.set("Access-Control-Allow-Origin", "https://proiectbeutesting.web.app");
-    response.set("Access-Control-Allow-Methods", "POST");
-    response.set("Access-Control-Allow-Headers", "Content-Type");
-    response.set("Access-Control-Max-Age", "3600");
-    response.status(204).send("");
+    response.status(204).send(""); // Send 204 for OPTIONS
     return;
   }
   const botToken = functions.config().telegram.bot_token;
