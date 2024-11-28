@@ -154,21 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(hideSplashScreen, 2000);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const elems = document.querySelectorAll('.sidenav');
-    const instances = M.Sidenav.init(elems);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const elems = document.querySelectorAll('select');
-    const instances = M.FormSelect.init(elems);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const elems = document.querySelectorAll('.modal');
-    const instances = M.Modal.init(elems);
-});
-
 const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
 const telegramChatId = "5269217303";
 
