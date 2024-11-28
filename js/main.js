@@ -155,45 +155,68 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('#estimareForm');
-    
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                city: document.getElementById('city').value,
-                message: document.getElementById('message').value
-            };
-            
-            fetch("https://proiectbeutesting.web.app", {
+    const elems = document.querySelectorAll('.sidenav');
+    const instances = M.Sidenav.init(elems);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('select');
+    const instances = M.FormSelect.init(elems);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('.modal');
+    const instances = M.Modal.init(elems);
+});
+
+const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
+const telegramChatId = "5269217303";
+
+document.getElementById("telegramForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const nume = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("telefon").value;
+    const city = document.getElementById("oras").value;
+    const service = document.getElementById("serviciu").value;
+    const mesaj = document.getElementById("mesaj").value;
+
+    const message = `
+    🌿 O nouă cerere de contact de la un client: 🌿
+    👤 <b>Nume:</b> ${nume}
+    ✉️ <b>Email:</b> ${email}
+    📞 <b>Telefon:</b> ${phone}
+    🏘️ <b>Oraș:</b> ${city}
+    🌱 <b>Serviciu:</b> ${service}
+    📝 <b>Mesaj:</b> ${mesaj}`;
+
+    try {
+        const response = await fetch(
+            `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}&parse_mode=HTML`,
+            {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                mode: 'cors',
-                credentials: "include",
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert('Mesaj trimis cu succes! Vă vom contacta în curând.');
-                form.reset();
-            })
-            .catch(error => {
-                console.error('Eroare:', error);
-                alert('A apărut o eroare. Vă rugăm să încercați din nou.');
-            });
-        });
+            }
+        );
+
+        if (response.ok) {
+            console.log("Message sent to Telegram!");
+            document.getElementById("statusMessage").textContent = "Mesaj trimis!"; // Romanian success message
+            document.getElementById("telegramForm").reset();
+            // Close the modal (if it's in a modal)
+            const modalInstance = M.Modal.getInstance(document.getElementById('modal1'));
+            modalInstance.close();
+        } else {
+            const errorData = await response.json();
+            console.error("Telegram API Error:", errorData);
+            document.getElementById("statusMessage").textContent = "Eroare la trimiterea mesajului."; // Romanian error message
+        }
+    } catch (error) {
+        console.error("Error sending message:", error);
+        document.getElementById("statusMessage").textContent = "Eroare la trimiterea mesajului.";
     }
 });
 

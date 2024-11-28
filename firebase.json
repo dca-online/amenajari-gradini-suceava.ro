@@ -10,8 +10,9 @@
       "README.md"
     ]
   },
-  "functions": [
-    {
+  "functions": {
+    "region": "europe-west1"
+  },
       "source": "functions",
       "codebase": "default",
       "ignore": [
@@ -25,5 +26,3 @@
         "npm --prefix \"$RESOURCE_DIR\" run lint"
       ]
     }
-  ]
-}
