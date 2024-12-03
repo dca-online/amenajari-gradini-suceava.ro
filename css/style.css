@@ -647,15 +647,17 @@ h6,
 }
 
 #reviews-section, #add-review-section {
-    position: relative;
-    width: 100%;
-    transform: translateY(20px);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: none;
 }
 
-#reviews-section.active, #add-review-section.active {
-    position: relative;
+#reviews-section.active,
+#add-review-section.active {
+    opacity: 1;
     transform: translateY(0);
+    display: block;
 }
 
 .star-rating {

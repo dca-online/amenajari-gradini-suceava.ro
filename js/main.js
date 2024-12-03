@@ -157,24 +157,31 @@ document.addEventListener("DOMContentLoaded", function () {
 const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
 const telegramChatId = "5269217303";
 
-document.getElementById("telegramForm").addEventListener("submit", async (event) => {
+document.getElementById("estimareForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const nume = document.getElementById("name").value;
     const email = document.getElementById("email").value;
-    const phone = document.getElementById("telefon").value;
-    const city = document.getElementById("oras").value;
-    const service = document.getElementById("serviciu").value;
+    const phone = document.getElementById("phone").value;
+    const city = document.getElementById("city").value;
+    const service = document.getElementById("service").value;
     const mesaj = document.getElementById("mesaj").value;
 
     const message = `
-    🌿 O nouă cerere de contact de la un client: 🌿
-    👤 <b>Nume:</b> ${nume}
-    ✉️ <b>Email:</b> ${email}
-    📞 <b>Telefon:</b> ${phone}
-    🏘️ <b>Oraș:</b> ${city}
-    🌱 <b>Serviciu:</b> ${service}
-    📝 <b>Mesaj:</b> ${mesaj}`;
+🌿 Cerere nouă de contact client: 
+
+
+👤 <b>Nume:</b> ${nume}
+
+✉️ <b>Email:</b> ${email}
+
+📞 <b>Telefon:</b> ${phone}
+
+🏘️ <b>Oraș:</b> ${city}
+
+🌱 <b>Serviciu:</b> ${service}
+
+📝 <b>Mesaj:</b> ${mesaj}`;
 
     try {
         const response = await fetch(
@@ -188,21 +195,17 @@ document.getElementById("telegramForm").addEventListener("submit", async (event)
         );
 
         if (response.ok) {
-            console.log("Message sent to Telegram!");
-            document.getElementById("statusMessage").textContent = "Mesaj trimis!"; // Romanian success message
-            document.getElementById("telegramForm").reset();
-            // Close the modal (if it's in a modal)
-            const modalInstance = M.Modal.getInstance(document.getElementById('modal1'));
-            modalInstance.close();
+            alert = ("Mesaj trimis cu succes!");
+            document.getElementById("estimareForm").reset();
         } else {
-            const errorData = await response.json();
-            console.error("Telegram API Error:", errorData);
-            document.getElementById("statusMessage").textContent = "Eroare la trimiterea mesajului."; // Romanian error message
+            alert = "A apărut o eroare la trimiterea mesajului.";
+            console.log("Error:"+ response.status);
+            document.getElementById("estimareForm").reset();
         }
     } catch (error) {
-        console.error("Error sending message:", error);
-        document.getElementById("statusMessage").textContent = "Eroare la trimiterea mesajului.";
+        console.log = ("Error:"+ error.messsage);
     }
+            
 });
 
 let currentRating = 0;
@@ -212,15 +215,16 @@ let checkInterval;
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
     const showReviewsBtn = document.getElementById('showReviews');
     const addReviewBtn = document.getElementById('addReview');
     const reviewsSection = document.getElementById('reviews-section');
     const addReviewSection = document.getElementById('add-review-section');
     const stars = document.querySelectorAll('.star');
 
+    // Initialize sections
+    reviewsSection.classList.add('active');
+    addReviewSection.classList.remove('active');
     loadReviews();
-
 
     addReviewBtn.addEventListener('focusout', () => {
         addReviewBtn.classList.add('#addReview:focus-within');
@@ -246,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (showReviews) {
                 showReviewsBtn.classList.add('active');
                 addReviewBtn.classList.remove('active');
+                loadReviews(); // Reload reviews when showing reviews section
             } else {
                 showReviewsBtn.classList.remove('active');
                 addReviewBtn.classList.add('active');
@@ -263,121 +268,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     }
 
+    // Show reviews button click handler
     showReviewsBtn.addEventListener('click', () => {
         toggleSections(true);
-        const addReviewButton = document.getElementById('addReview');
-        if (addReviewButton.textContent === 'Înapoi') {
-            animateButtonText(addReviewButton);
+        if (addReviewBtn.textContent === 'Înapoi') {
+            animateButtonText(addReviewBtn);
         }
     });
     
+    // Add review button click handler
     addReviewBtn.addEventListener('click', function() {
-        const button = this;
-        const newText = button.textContent === 'Adaugă Review' ? 'Înapoi' : 'Adaugă Review';
-        animateButtonText(this);
-        toggleSections(!reviewsSection.classList.contains('active'));
-
-        button.style.transform = 'translateZ(0)';
-        button.classList.add('text-switching');
-
-        requestAnimationFrame(() => {
-            button.style.opacity = '0';
-            button.style.transform = 'translateY(-5px) translateZ(0)';
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    button.textContent = newText;
-                    
-                    requestAnimationFrame(() => {
-                        button.style.opacity = '1';
-                        button.style.transform = 'translateY(0) translateZ(0)';
-                        button.classList.remove('text-switching');
-                    });
-                }, 100);
-            });
-        });
-     document.getElementById('review-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-           if (isSubmitting) return;
-           if (!currentRating || currentRating === 0) {
-                alert('Vă rugăm să selectați un rating');
-                return;
-            }
-            
-            isSubmitting = true;
-        
-            const formData = {
-                name: document.getElementById('reviewName').value,
-                service: document.getElementById('reviewService').value,
-                title: document.getElementById('reviewTitle').value,
-                rating: parseInt(currentRating),
-                city: document.getElementById('reviewCity').value,
-                message: document.getElementById('reviewMessage').value,
-                date: new Date().toISOString()
-            };
-
-            if (reviewsSection.classList.contains('active')) {
-                requestAnimationFrame(() => {
-                    reviewsSection.style.transform = 'translateY(-20px)';
-                    reviewsSection.style.opacity = '0';
-                
-                setTimeout(() => {
-                    reviewsSection.classList.remove('active');
-                    addReviewSection.classList.add('active');
-                    
-                    requestAnimationFrame(() => {
-                        addReviewSection.style.transform = 'translateY(0)';
-                        addReviewSection.style.opacity = '1';
-                        button.classList.add('active');
-                    });
-                }, 300);
-            });
-             } else {
-            requestAnimationFrame(() => {
-                addReviewSection.style.transform = 'translateY(-20px)';
-                addReviewSection.style.opacity = '0';
-                
-                setTimeout(() => {
-                    addReviewSection.classList.remove('active');
-                    reviewsSection.classList.add('active');
-                    
-                    requestAnimationFrame(() => {
-                        reviewsSection.style.transform = 'translateY(0)';
-                        reviewsSection.style.opacity = '1';
-                        button.classList.remove('active');
-                    });
-                }, 300);
-            });
+        const isShowingReviews = this.textContent === 'Înapoi';
+        if (isShowingReviews) {
+            toggleSections(true);
+        } else {
+            toggleSections(false);
         }
+        animateButtonText(this);
     });
 
-    function highlightStars(rating) {
-        stars.forEach(star => {
-            const starRating = star.getAttribute('data-rating');
-            if (starRating <= rating) {
-                star.textContent = '★';
-                star.classList.add('active');
-            } else {
-                star.textContent = '☆';
-                star.classList.remove('active');
-            }
-        });
-    }
-
-    stars.forEach(star => {
-        star.addEventListener('mouseover', function() {
-            highlightStars(this.getAttribute('data-rating'));
-        });
-
-        star.addEventListener('mouseout', () => {
-            highlightStars(currentRating);
-        });
-
-        star.addEventListener('click', function() {
-            currentRating = this.getAttribute('data-rating');
-            highlightStars(currentRating);
-        });
-    });
+    // Remove the duplicate event listeners at the bottom of the file
 });
 
 document.getElementById('review-form').addEventListener('submit', function(e) {
@@ -398,67 +308,55 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
         title: document.getElementById('reviewTitle').value,
         rating: currentRating,
         city: document.getElementById('reviewCity').value,
-        message: document.getElementById('reviewMessage').value
+        message: document.getElementById('reviewMessage').value,
+        timestamp: Date.now() // Add timestamp for ordering
     };
-
-    const reviewHTML = `
-    <div class="testimonial-item bg-white rounded p-4 p-sm-5">
-        <div class="stars mb-2">
-            ${getStarRating(formData.rating)}
-        </div>
-        <h3 class="mb-3">${formData.title}</h3>
-        <p class="fs-5">"${formData.message}"</p>
-        <h4>${formData.name}</h4>
-        <span>${formData.city}</span>
-        <span>·</span>
-        <small class="text-muted">${formData.service}</small>
-    </div>
-`;
-
-$('.testimonial-carousel').trigger('add.owl.carousel', [reviewHTML]);
-$('.testimonial-carousel').trigger('refresh.owl.carousel');
     
-db.ref('reviews').push(formData)
-    .then(() => {
-        alert('Review-ul a fost trimis cu succes!');
-        document.getElementById('review-form').reset();
-        document.querySelectorAll('.star').forEach(star => {
-            star.textContent = '☆';
+    db.ref('reviews').push(formData)
+        .then(() => {
+            alert('Review-ul a fost trimis cu succes!');
+            document.getElementById('review-form').reset();
+            document.querySelectorAll('.star').forEach(star => {
+                star.textContent = '☆';
+            });
+            currentRating = 0;
+            isSubmitting = false;
+            
+            // Switch to reviews section
+            toggleSections(true);
+            animateButtonText(document.getElementById('addReview'));
+        })
+        .catch(error => {
+            console.error('Eroare:', error);
+            if (error.code === 'PERMISSION_DENIED') {
+                alert('Nu aveți permisiunea de a adăuga review-uri. Vă rugăm să vă autentificați.');
+            } else {
+                alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
+            }
+            isSubmitting = false;
         });
-        currentRating = 0;
-        isSubmitting = false;
-        
-        const mockReviews = document.querySelector('.mock-reviews');
-        if (mockReviews) {
-            mockReviews.style.display = 'none';
-        }
-        
-        toggleSections(true);
-        animateButtonText(document.getElementById('addReview'));
-        loadReviews();
-    })
-    .catch(error => {
-        console.error('Eroare:', error);
-        if (error.code === 'PERMISSION_DENIED') {
-            alert('Nu aveți permisiunea de a adăuga review-uri. Vă rugăm să vă autentificați.');
-        } else {
-            alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
-        }
-        isSubmitting = false;
-    });
 });
 
 function loadReviews() {
     db.ref('reviews').on('value', (snapshot) => {
         const reviews = snapshot.val();
-        if (!reviews) return;
-
-        const reviewsArray = Object.values(reviews);
         const reviewsContainer = document.querySelector('.testimonial-carousel');
         
-        $('.testimonial-carousel').owlCarousel('destroy');
-        $('.owl-nav').remove();
+        // Handle empty reviews case
+        if (!reviews) {
+            reviewsContainer.innerHTML = '';
+            initializeCarousel();
+            return;
+        }
 
+        const reviewsArray = Object.values(reviews);
+        
+        // Destroy existing carousel
+        if ($.fn.owlCarousel) {
+            $('.testimonial-carousel').owlCarousel('destroy');
+        }
+        
+        // Update HTML content
         reviewsContainer.innerHTML = reviewsArray.map(review => `
             <div class="testimonial-item bg-white rounded p-4 p-sm-5">
                 <div class="stars mb-2">
@@ -473,19 +371,10 @@ function loadReviews() {
             </div>
         `).join('');
 
-        $('.testimonial-carousel').owlCarousel({
-            autoplay: true,
-            smartSpeed: 1000,
-            items: 1,
-            dots: false,
-            loop: true,
-            nav: true,
-            navText: [
-                '<i class="bi bi-chevron-left"></i>',
-                '<i class="bi bi-chevron-right"></i>'
-            ]
-        });
+        // Initialize new carousel
+        initializeCarousel(reviewsArray.length - 1);
 
+        // Update mock reviews visibility
         const mockReviews = document.querySelector('.mock-reviews');
         if (mockReviews) {
             mockReviews.style.display = reviewsArray.length > 0 ? 'none' : 'block';
@@ -493,21 +382,22 @@ function loadReviews() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadReviews);
-document.getElementById('showReviews').addEventListener('click', function() {
-    document.getElementById('reviews-section').style.display = 'block';
-    document.getElementById('add-review-section').style.display = 'none';
-    loadReviews(); // Reload reviews when switching to reviews section
-    checkInterval = setInterval(loadReviews, 3000);
-    window.addEventListener('beforeunload', () => {
-        if (checkInterval) {
-            clearInterval(checkInterval);
+function initializeCarousel(startPosition = 0) {
+    $('.testimonial-carousel').owlCarousel({
+        autoplay: true,
+        smartSpeed: 1000,
+        items: 1,
+        dots: false,
+        loop: true,
+        nav: true,
+        startPosition: startPosition, // Start at the latest review
+        navText: [
+            '<i class="bi bi-chevron-left"></i>',
+            '<i class="bi bi-chevron-right"></i>'
+        ],
+        onInitialized: function() {
+            // Ensure carousel is visible
+            $('.testimonial-carousel').css('opacity', '1');
         }
     });
-});
-
-document.getElementById('addReview').addEventListener('click', function() {
-    document.getElementById('add-review-section').style.display = 'block';
-    document.getElementById('reviews-section').style.display = 'none';
-});
-});
+}
