@@ -1,12 +1,10 @@
 {
-    "name": "your-project-name",
+    "name": "proiectbeu",
     "version": "1.0.0",
-    "description": "",
+    "description": "Proiect Beu website",
     "main": "index.js",
     "scripts": {
         "build": "echo 'No build step required'"
     },
-    "dependencies": {
-        // your dependencies here
-    }
+    "dependencies": {}
 }

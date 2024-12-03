@@ -1,17 +1,3 @@
-function getStarRating(rating) {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-}
- 
-db.ref('test').set({
-    test: 'test'
-})
-.then(() => {
-    console.log('Database write permission confirmed');
-})
-.catch(error => {
-    console.error('Database permission error:', error);
-});
-
 (function ($) {
     "use strict";
 
@@ -126,11 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('Metadata loaded, attempting to play');
             splashVideo.play().catch(error => {
                 console.error('Autoplay error:', error);
+
+                hideSplashScreen();
             });
         };
 
         splashVideo.onerror = (e) => {
             console.error('Video error:', e);
+
+            hideSplashScreen();
         };
     }
 
@@ -152,6 +142,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
     splashVideo.addEventListener('ended', hideSplashScreen);
     setTimeout(hideSplashScreen, 2000);
+
+
+    if (typeof db !== 'undefined') {
+        db.ref('test').set({
+            test: 'test'
+        })
+        .then(() => {
+            console.log('Database write permission confirmed');
+        })
+        .catch(error => {
+            console.error('Database permission error:', error);
+        });
+    } else {
+        console.error('Firebase database not initialized');
+    }
+
+    const stars = document.querySelectorAll('.star');
+    
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseover', function() {
+            const rating = this.getAttribute('data-rating');
+            updateStars(rating, true);
+        });
+
+        star.addEventListener('mouseout', function() {
+            updateStars(currentRating, false);
+        });
+
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            currentRating = rating;
+            updateStars(rating, false);
+        });
+    });
+
+    function updateStars(rating, isHover) {
+        stars.forEach(star => {
+            const starRating = parseInt(star.getAttribute('data-rating'));
+            if (starRating <= rating) {
+                star.textContent = '★';
+                if (!isHover) {
+                    star.classList.add('active');
+                }
+            } else {
+                star.textContent = '☆';
+                if (!isHover) {
+                    star.classList.remove('active');
+                }
+            }
+        });
+    }
 });
 
 const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
@@ -213,6 +254,44 @@ let isSubmitting = false;
 let previousReviewCount = 0;
 let checkInterval;
 
+function toggleSections(showReviews) {
+    const reviewsSection = document.getElementById('reviews-section');
+    const addReviewSection = document.getElementById('add-review-section');
+    const showReviewsBtn = document.getElementById('showReviews');
+    const addReviewBtn = document.getElementById('addReview');
+
+    const fadeOutSection = showReviews ? addReviewSection : reviewsSection;
+    const fadeInSection = showReviews ? reviewsSection : addReviewSection;
+    
+    fadeOutSection.style.transform = 'translateY(-20px)';
+    fadeOutSection.style.opacity = '0';
+    
+    setTimeout(() => {
+        fadeOutSection.classList.remove('active');
+        fadeInSection.classList.add('active');
+        fadeInSection.style.transform = 'translateY(0)';
+        fadeInSection.style.opacity = '1';
+        
+        if (showReviews) {
+            showReviewsBtn.classList.add('active');
+            addReviewBtn.classList.remove('active');
+            loadReviews();
+        } else {
+            showReviewsBtn.classList.remove('active');
+            addReviewBtn.classList.add('active');
+        }
+    }, 300);
+}
+
+function animateButtonText(button) {
+    const newText = button.textContent === 'Adaugă' ? 'Înapoi' : 'Adaugă';
+    button.classList.add('text-switching');
+    
+    setTimeout(() => {
+        button.textContent = newText;
+        button.classList.remove('text-switching');
+    }, 150);
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const showReviewsBtn = document.getElementById('showReviews');
@@ -221,7 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const addReviewSection = document.getElementById('add-review-section');
     const stars = document.querySelectorAll('.star');
 
-    // Initialize sections
     reviewsSection.classList.add('active');
     addReviewSection.classList.remove('active');
     loadReviews();
@@ -234,41 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addReviewBtn.classList.remove('#addReview:focus-within');
     });
 
-    function toggleSections(showReviews) {
-        const fadeOutSection = showReviews ? addReviewSection : reviewsSection;
-        const fadeInSection = showReviews ? reviewsSection : addReviewSection;
-        
-        fadeOutSection.style.transform = 'translateY(-20px)';
-        fadeOutSection.style.opacity = '0';
-        
-        setTimeout(() => {
-            fadeOutSection.classList.remove('active');
-            fadeInSection.classList.add('active');
-            fadeInSection.style.transform = 'translateY(0)';
-            fadeInSection.style.opacity = '1';
-            
-            if (showReviews) {
-                showReviewsBtn.classList.add('active');
-                addReviewBtn.classList.remove('active');
-                loadReviews(); // Reload reviews when showing reviews section
-            } else {
-                showReviewsBtn.classList.remove('active');
-                addReviewBtn.classList.add('active');
-            }
-        }, 300);
-    }
-
-    function animateButtonText(button) {
-        const newText = button.textContent === 'Adaugă Review' ? 'Înapoi' : 'Adaugă Review';
-        button.classList.add('text-switching');
-        
-        setTimeout(() => {
-            button.textContent = newText;
-            button.classList.remove('text-switching');
-        }, 150);
-    }
-
-    // Show reviews button click handler
+  
     showReviewsBtn.addEventListener('click', () => {
         toggleSections(true);
         if (addReviewBtn.textContent === 'Înapoi') {
@@ -276,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Add review button click handler
+
     addReviewBtn.addEventListener('click', function() {
         const isShowingReviews = this.textContent === 'Înapoi';
         if (isShowingReviews) {
@@ -287,7 +331,6 @@ document.addEventListener('DOMContentLoaded', function() {
         animateButtonText(this);
     });
 
-    // Remove the duplicate event listeners at the bottom of the file
 });
 
 document.getElementById('review-form').addEventListener('submit', function(e) {
@@ -309,7 +352,7 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
         rating: currentRating,
         city: document.getElementById('reviewCity').value,
         message: document.getElementById('reviewMessage').value,
-        timestamp: Date.now() // Add timestamp for ordering
+        timestamp: Date.now()
     };
     
     db.ref('reviews').push(formData)
@@ -321,8 +364,7 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
             });
             currentRating = 0;
             isSubmitting = false;
-            
-            // Switch to reviews section
+
             toggleSections(true);
             animateButtonText(document.getElementById('addReview'));
         })
@@ -342,7 +384,7 @@ function loadReviews() {
         const reviews = snapshot.val();
         const reviewsContainer = document.querySelector('.testimonial-carousel');
         
-        // Handle empty reviews case
+
         if (!reviews) {
             reviewsContainer.innerHTML = '';
             initializeCarousel();
@@ -351,12 +393,10 @@ function loadReviews() {
 
         const reviewsArray = Object.values(reviews);
         
-        // Destroy existing carousel
         if ($.fn.owlCarousel) {
             $('.testimonial-carousel').owlCarousel('destroy');
         }
         
-        // Update HTML content
         reviewsContainer.innerHTML = reviewsArray.map(review => `
             <div class="testimonial-item bg-white rounded p-4 p-sm-5">
                 <div class="stars mb-2">
@@ -371,10 +411,8 @@ function loadReviews() {
             </div>
         `).join('');
 
-        // Initialize new carousel
         initializeCarousel(reviewsArray.length - 1);
 
-        // Update mock reviews visibility
         const mockReviews = document.querySelector('.mock-reviews');
         if (mockReviews) {
             mockReviews.style.display = reviewsArray.length > 0 ? 'none' : 'block';
@@ -390,13 +428,13 @@ function initializeCarousel(startPosition = 0) {
         dots: false,
         loop: true,
         nav: true,
-        startPosition: startPosition, // Start at the latest review
+        startPosition: startPosition,
         navText: [
             '<i class="bi bi-chevron-left"></i>',
             '<i class="bi bi-chevron-right"></i>'
         ],
         onInitialized: function() {
-            // Ensure carousel is visible
+
             $('.testimonial-carousel').css('opacity', '1');
         }
     });
