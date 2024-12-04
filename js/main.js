@@ -63,7 +63,6 @@
     });
 
 })(jQuery);
-
 document.addEventListener("DOMContentLoaded", function () {
     const splashContainer = document.getElementById('splash-container');
     const splashVideo = document.getElementById('splash-video');
@@ -439,3 +438,4 @@ function initializeCarousel(startPosition = 0) {
         }
     });
 }
+
