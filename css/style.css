@@ -118,6 +118,9 @@ h6,
     -webkit-backdrop-filter: blur(10px);
     border-radius: 0 0 28px 28px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    max-width: 100%; /* Ensure containers do not exceed the viewport width */
+    padding: 0 15px; /* Add padding to match the container's padding */
+    box-sizing: border-box;
 }
 
 .navbar .navbar-brand,
@@ -875,4 +878,10 @@ h6,
         padding-top: 10px !important;
         padding-bottom: 10px !important;
     }
+}
+
+.container, .container-fluid, .estimation-form-container {
+    max-width: 100%;
+    padding: 0 15px; 
+    box-sizing: border-box;
 }
