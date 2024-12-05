@@ -14,9 +14,9 @@
 
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
-            $('.sticky-top').addClass('shadow-sm').css('top', '0px');
+            $('.sticky-top').addClass('shadow-sm scrolled').css('top', '5px');
         } else {
-            $('.sticky-top').removeClass('shadow-sm').css('top', '-100px');
+            $('.sticky-top').removeClass('shadow-sm scrolled').css('top', '0');
         }
     });
 
@@ -60,6 +60,107 @@
             '<i class="bi bi-chevron-left"></i>',
             '<i class="bi bi-chevron-right"></i>'
         ]
+    });
+
+    $(document).ready(function() {
+        const contactButton = $('#contact-button');
+        const contactPopup = $('#contact-popup');
+        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+        if (isMobile) {
+            // Mobile-specific handlers
+            contactButton.on('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (contactPopup.hasClass('show')) {
+                    contactPopup.removeClass('show');
+                    setButtonToDark();
+                } else {
+                    contactPopup.addClass('show');
+                    setButtonToLight();
+                }
+            });
+
+            $(document).on('touchstart', function(e) {
+                if (!$(e.target).closest('#contact-button, #contact-popup').length) {
+                    if (contactPopup.hasClass('show')) {
+                        contactPopup.removeClass('show');
+                        setButtonToDark();
+                    }
+                }
+            });
+
+            $(window).on('scroll', function() {
+                if (contactPopup.hasClass('show')) {
+                    contactPopup.removeClass('show');
+                    setButtonToDark();
+                }
+            });
+        } else {
+            // Desktop handlers (unchanged)
+            contactButton.on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (contactPopup.hasClass('show')) {
+                    contactPopup.removeClass('show');
+                    setButtonToDark();
+                } else {
+                    contactPopup.addClass('show');
+                    setButtonToLight();
+                }
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#contact-button, #contact-popup').length) {
+                    if (contactPopup.hasClass('show')) {
+                        contactPopup.removeClass('show');
+                        setButtonToDark();
+                    }
+                }
+            });
+
+            $(window).on('scroll', function() {
+                if (contactPopup.hasClass('show')) {
+                    contactPopup.removeClass('show');
+                    setButtonToDark();
+                }
+            });
+        }
+
+        function setButtonToLight() {
+            contactButton.css('background-color', '#4CAF50'); // Vibrant green color
+            contactButton.css('color', '#ffffff'); // White icon
+        }
+
+        function setButtonToDark() {
+            contactButton.css('background-color', '#4CAF50'); // Vibrant green color
+            contactButton.css('color', '#ffffff'); // White icon
+        }
+    });
+
+    $(document).ready(function() {
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        entry.target.classList.add('in-view');
+                        entry.target.classList.remove('out-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                        entry.target.classList.add('out-view');
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '-10% 0px'
+            });
+
+            document.querySelectorAll('.portfolio-inner').forEach(item => {
+                observer.observe(item);
+            });
+        }
     });
 
 })(jQuery);
@@ -159,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const stars = document.querySelectorAll('.star');
     
-    stars.forEach((star, index) => {
+    stars.forEach((star) => {
         star.addEventListener('mouseover', function() {
             const rating = this.getAttribute('data-rating');
             updateStars(rating, true);
@@ -192,6 +293,58 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    document.getElementById('review-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!currentRating || currentRating === 0) {
+            alert('Vă rugăm să selectați un rating');
+            return;
+        }
+        
+        const formData = {
+            name: document.getElementById('reviewName').value,
+            service: document.getElementById('reviewService').value,
+            title: document.getElementById('reviewTitle').value,
+            rating: currentRating,
+            city: document.getElementById('reviewCity').value,
+            message: document.getElementById('reviewMessage').value,
+            timestamp: Date.now()
+        };
+        
+        db.ref('reviews').push(formData)
+            .then(() => {
+                // Reset form and rating stars
+                document.getElementById('review-form').reset();
+                stars.forEach(star => {
+                    star.textContent = '☆';
+                    star.classList.remove('active');
+                });
+                currentRating = 0;
+
+                // Switch back to reviews section
+                toggleSections(true);
+                
+                // Reset the "Add Review" button text if needed
+                const addReviewBtn = document.getElementById('addReview');
+                if (addReviewBtn.textContent === 'Înapoi') {
+                    animateButtonText(addReviewBtn);
+                }
+
+                // Force carousel to show the last item (latest review)
+                setTimeout(() => {
+                    const carousel = $('.testimonial-carousel');
+                    if (carousel.length) {
+                        const totalItems = carousel.find('.owl-item').length;
+                        carousel.trigger('to.owl.carousel', [totalItems - 1, 300]);
+                    }
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Eroare:', error);
+                alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
+            });
+    });
 });
 
 const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
@@ -206,10 +359,10 @@ document.getElementById("estimareForm").addEventListener("submit", async (event)
     const city = document.getElementById("city").value;
     const service = document.getElementById("service").value;
     const mesaj = document.getElementById("mesaj").value;
+    const interval = document.getElementById("interval").value;
 
     const message = `
 🌿 Cerere nouă de contact client: 
-
 
 👤 <b>Nume:</b> ${nume}
 
@@ -220,6 +373,8 @@ document.getElementById("estimareForm").addEventListener("submit", async (event)
 🏘️ <b>Oraș:</b> ${city}
 
 🌱 <b>Serviciu:</b> ${service}
+
+🗓️ <b>Perioada aproximativă:</b> ${interval}
 
 📝 <b>Mesaj:</b> ${mesaj}`;
 
@@ -245,7 +400,6 @@ document.getElementById("estimareForm").addEventListener("submit", async (event)
     } catch (error) {
         console.log = ("Error:"+ error.messsage);
     }
-            
 });
 
 let currentRating = 0;
@@ -283,7 +437,7 @@ function toggleSections(showReviews) {
 }
 
 function animateButtonText(button) {
-    const newText = button.textContent === 'Adaugă' ? 'Înapoi' : 'Adaugă';
+    const newText = button.textContent === 'Adaugă' ? 'Înapoi' : 'Adaug';
     button.classList.add('text-switching');
     
     setTimeout(() => {
@@ -332,65 +486,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-document.getElementById('review-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    if (isSubmitting) return;
-    
-    if (!currentRating || currentRating === 0) {
-        alert('Vă rugăm să selectați un rating');
-        return;
-    }
-    
-    isSubmitting = true;
-
-    const formData = {
-        name: document.getElementById('reviewName').value,
-        service: document.getElementById('reviewService').value,
-        title: document.getElementById('reviewTitle').value,
-        rating: currentRating,
-        city: document.getElementById('reviewCity').value,
-        message: document.getElementById('reviewMessage').value,
-        timestamp: Date.now()
-    };
-    
-    db.ref('reviews').push(formData)
-        .then(() => {
-            alert('Review-ul a fost trimis cu succes!');
-            document.getElementById('review-form').reset();
-            document.querySelectorAll('.star').forEach(star => {
-                star.textContent = '☆';
-            });
-            currentRating = 0;
-            isSubmitting = false;
-
-            toggleSections(true);
-            animateButtonText(document.getElementById('addReview'));
-        })
-        .catch(error => {
-            console.error('Eroare:', error);
-            if (error.code === 'PERMISSION_DENIED') {
-                alert('Nu aveți permisiunea de a adăuga review-uri. Vă rugăm să vă autentificați.');
-            } else {
-                alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
-            }
-            isSubmitting = false;
-        });
-});
-
 function loadReviews() {
     db.ref('reviews').on('value', (snapshot) => {
         const reviews = snapshot.val();
         const reviewsContainer = document.querySelector('.testimonial-carousel');
         
-
         if (!reviews) {
             reviewsContainer.innerHTML = '';
             initializeCarousel();
             return;
         }
 
-        const reviewsArray = Object.values(reviews);
+        // Convert to array maintaining database order
+        const reviewsArray = Object.entries(reviews)
+            .map(([key, value]) => ({
+                ...value,
+                key
+            }));
         
         if ($.fn.owlCarousel) {
             $('.testimonial-carousel').owlCarousel('destroy');
@@ -410,7 +522,22 @@ function loadReviews() {
             </div>
         `).join('');
 
-        initializeCarousel(reviewsArray.length - 1);
+        // Initialize carousel with the last item as default position
+        $('.testimonial-carousel').owlCarousel({
+            autoplay: false,
+            smartSpeed: 1000,
+            center: true,
+            margin: 24,
+            dots: true,
+            loop: true,
+            nav: true,
+            startPosition: reviewsArray.length - 1, // Start from last item
+            items: 1,
+            navText: [
+                '<i class="bi bi-arrow-left"></i>',
+                '<i class="bi bi-arrow-right"></i>'
+            ]
+        });
 
         const mockReviews = document.querySelector('.mock-reviews');
         if (mockReviews) {
@@ -419,23 +546,108 @@ function loadReviews() {
     });
 }
 
-function initializeCarousel(startPosition = 0) {
+function initializeCarousel(totalItems = 0) {
     $('.testimonial-carousel').owlCarousel({
-        autoplay: true,
+        autoplay: false, // Disabled autoplay to maintain position
         smartSpeed: 1000,
-        items: 1,
-        dots: false,
-        loop: true,
-        nav: true,
-        startPosition: startPosition,
+        center: true,
+        margin: 24,
+        dots: true,
+        loop: totalItems > 1,
+        nav: totalItems > 1,
+        startPosition: 0, // Always start with newest review
         navText: [
-            '<i class="bi bi-chevron-left"></i>',
-            '<i class="bi bi-chevron-right"></i>'
+            '<i class="bi bi-arrow-left"></i>',
+            '<i class="bi bi-arrow-right"></i>'
         ],
-        onInitialized: function() {
-
-            $('.testimonial-carousel').css('opacity', '1');
+        responsive: {
+            0: { items: 1 },
+            768: { items: 1 }
         }
     });
 }
+
+$(document).ready(function() {
+    let lastScrollTop = 0;
+    let scrollThreshold = 50;
+    
+    // Use jQuery consistently for events
+    contactButton.on('click touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        popup.toggleClass('show');
+    });
+
+    // Handle document clicks
+    $(document).on('click touchstart', function(e) {
+        if (popup.hasClass('show') && 
+            !popup.is(e.target) && 
+            !popup.has(e.target).length && 
+            !contactButton.is(e.target) && 
+            !contactButton.has(e.target).length) {
+            popup.removeClass('show');
+        }
+    });
+
+    // Handle scroll
+    $(window).on('scroll', function() {
+        let currentScroll = $(this).scrollTop();
+        if (popup.hasClass('show')) {
+            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
+                popup.removeClass('show');
+            }
+        }
+        lastScrollTop = currentScroll;
+    });
+});
+
+$(document).ready(function() {
+    let lastScrollTop = 0;
+    let scrollThreshold = 50;
+    let popup = document.getElementById('contact-popup');
+    
+    $(window).scroll(function() {
+        let currentScroll = $(this).scrollTop();
+        
+        if (popup.classList.contains('show')) {
+            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
+                popup.classList.remove('show');
+            }
+        }
+        
+        lastScrollTop = currentScroll;
+    });
+});
+
+$(document).ready(function() {
+    const contactButton = $('#contact-button');
+    const contactPopup = $('#contact-popup');
+    let lastScrollTop = 0;
+    const scrollThreshold = 50;
+
+    $(window).on('scroll', function() {
+        let currentScroll = $(this).scrollTop();
+        
+        if (contactPopup.hasClass('show')) {
+            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
+                contactPopup.removeClass('show');
+                contactButton.removeClass('scrolled reverting');
+            } else {
+                contactButton.addClass('scrolled');
+            }
+        } else {
+            contactButton.removeClass('scrolled');
+        }
+
+        lastScrollTop = currentScroll;
+    });
+
+    contactButton.on('click', function() {
+        if (contactPopup.hasClass('show')) {
+            contactButton.addClass('reverting');
+        } else {
+            contactButton.removeClass('reverting');
+        }
+    });
+});
 
