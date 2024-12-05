@@ -13,7 +13,7 @@
     new WOW().init();
 
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
+        if ($(this).scrollTop() > 50) {
             $('.sticky-top').addClass('shadow-sm scrolled').css('top', '5px');
         } else {
             $('.sticky-top').removeClass('shadow-sm scrolled').css('top', '0');
@@ -65,78 +65,58 @@
     $(document).ready(function() {
         const contactButton = $('#contact-button');
         const contactPopup = $('#contact-popup');
-        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+        let isAnimating = false;
+        let lastScrollTop = 0;
+        const scrollThreshold = 5;
 
-        if (isMobile) {
-            // Mobile-specific handlers
-            contactButton.on('touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+        contactButton.off();
+        $(document).off('click.contactPopup touchstart.contactPopup');
+        $(window).off('scroll.contactPopup');
 
+        contactButton.on('click touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (isAnimating) return;
+            
+            isAnimating = true;
+            setTimeout(() => isAnimating = false, 300);
+            
+            if (contactPopup.hasClass('show')) {
+                closePopup();
+            } else {
+                openPopup();
+            }
+        });
+
+        $(document).on('click.contactPopup touchstart.contactPopup', function(e) {
+            if (!$(e.target).closest('#contact-button, #contact-popup').length) {
                 if (contactPopup.hasClass('show')) {
-                    contactPopup.removeClass('show');
-                    setButtonToDark();
-                } else {
-                    contactPopup.addClass('show');
-                    setButtonToLight();
+                    closePopup();
                 }
-            });
+            }
+        });
 
-            $(document).on('touchstart', function(e) {
-                if (!$(e.target).closest('#contact-button, #contact-popup').length) {
-                    if (contactPopup.hasClass('show')) {
-                        contactPopup.removeClass('show');
-                        setButtonToDark();
-                    }
+        $(window).on('scroll.contactPopup', function() {
+            let currentScroll = $(this).scrollTop();
+            
+            if (contactPopup.hasClass('show')) {
+                if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
+                    closePopup();
                 }
-            });
+            }
+            
+            lastScrollTop = currentScroll;
+        });
 
-            $(window).on('scroll', function() {
-                if (contactPopup.hasClass('show')) {
-                    contactPopup.removeClass('show');
-                    setButtonToDark();
-                }
-            });
-        } else {
-            // Desktop handlers (unchanged)
-            contactButton.on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                if (contactPopup.hasClass('show')) {
-                    contactPopup.removeClass('show');
-                    setButtonToDark();
-                } else {
-                    contactPopup.addClass('show');
-                    setButtonToLight();
-                }
-            });
-
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('#contact-button, #contact-popup').length) {
-                    if (contactPopup.hasClass('show')) {
-                        contactPopup.removeClass('show');
-                        setButtonToDark();
-                    }
-                }
-            });
-
-            $(window).on('scroll', function() {
-                if (contactPopup.hasClass('show')) {
-                    contactPopup.removeClass('show');
-                    setButtonToDark();
-                }
-            });
+        function openPopup() {
+            contactPopup.addClass('show');
+            contactButton.addClass('active');
         }
 
-        function setButtonToLight() {
-            contactButton.css('background-color', '#4CAF50'); // Vibrant green color
-            contactButton.css('color', '#ffffff'); // White icon
-        }
-
-        function setButtonToDark() {
-            contactButton.css('background-color', '#4CAF50'); // Vibrant green color
-            contactButton.css('color', '#ffffff'); // White icon
+        function closePopup() {
+            contactPopup.removeClass('show');
+            contactButton.removeClass('active');
         }
     });
 
@@ -314,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         db.ref('reviews').push(formData)
             .then(() => {
-                // Reset form and rating stars
+
                 document.getElementById('review-form').reset();
                 stars.forEach(star => {
                     star.textContent = '☆';
@@ -322,16 +302,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 currentRating = 0;
 
-                // Switch back to reviews section
                 toggleSections(true);
-                
-                // Reset the "Add Review" button text if needed
+
                 const addReviewBtn = document.getElementById('addReview');
                 if (addReviewBtn.textContent === 'Înapoi') {
                     animateButtonText(addReviewBtn);
                 }
 
-                // Force carousel to show the last item (latest review)
                 setTimeout(() => {
                     const carousel = $('.testimonial-carousel');
                     if (carousel.length) {
@@ -362,11 +339,11 @@ document.getElementById("estimareForm").addEventListener("submit", async (event)
     const interval = document.getElementById("interval").value;
 
     const message = `
-�� Cerere nouă de contact client: 
+ Cerere nouă de contact client: 
 
 👤 <b>Nume:</b> ${nume}
 
-✉️ <b>Email:</b> ${email}
+️ <b>Email:</b> ${email}
 
 📞 <b>Telefon:</b> ${phone}
 
@@ -437,7 +414,7 @@ function toggleSections(showReviews) {
 }
 
 function animateButtonText(button) {
-    const newText = button.textContent === 'Adaugă' ? 'Înapoi' : 'Adaug';
+    const newText = button.textContent === 'Adaugă' ? 'Înapoi' : 'Adaugă';
     button.classList.add('text-switching');
     
     setTimeout(() => {
@@ -467,10 +444,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
     showReviewsBtn.addEventListener('click', () => {
+
+        showReviewsBtn.classList.remove('active');
+        showReviewsBtn.blur(); 
+        
         toggleSections(true);
         if (addReviewBtn.textContent === 'Înapoi') {
             animateButtonText(addReviewBtn);
         }
+        
+        setTimeout(() => {
+            showReviewsBtn.classList.add('active');
+        }, 300);
     });
     
 
@@ -579,97 +564,19 @@ function initializeCarousel(totalItems = 0) {
 }
 
 $(document).ready(function() {
-    let lastScrollTop = 0;
-    let scrollThreshold = 50;
+    const navbarToggler = $('.navbar-toggler');
+    const navbar = $('.navbar-collapse');
     
-    // Use jQuery consistently for events
-    contactButton.on('click touchend', function(e) {
-        e.preventDefault();
+    navbarToggler.on('click touchstart', function(e) {
         e.stopPropagation();
-        popup.toggleClass('show');
+        $(this).focus();
     });
-
-    // Handle document clicks
-    $(document).on('click touchstart', function(e) {
-        if (popup.hasClass('show') && 
-            !popup.is(e.target) && 
-            !popup.has(e.target).length && 
-            !contactButton.is(e.target) && 
-            !contactButton.has(e.target).length) {
-            popup.removeClass('show');
-        }
-    });
-
-    // Handle scroll
-    $(window).on('scroll', function() {
-        let currentScroll = $(this).scrollTop();
-        if (popup.hasClass('show')) {
-            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
-                popup.removeClass('show');
-            }
-        }
-        lastScrollTop = currentScroll;
-    });
-});
-
-$(document).ready(function() {
-    let lastScrollTop = 0;
-    let scrollThreshold = 50;
-    let popup = document.getElementById('contact-popup');
     
-    $(window).scroll(function() {
-        let currentScroll = $(this).scrollTop();
-        
-        if (popup.classList.contains('show')) {
-            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
-                popup.classList.remove('show');
-            }
-        }
-        
-        lastScrollTop = currentScroll;
-    });
-});
-
-$(document).ready(function() {
-    const contactButton = $('#contact-button');
-    const contactPopup = $('#contact-popup');
-    let lastScrollTop = 0;
-    const scrollThreshold = 50;
-
-    $(window).on('scroll', function() {
-        let currentScroll = $(this).scrollTop();
-        
-        if (contactPopup.hasClass('show')) {
-            if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
-                contactPopup.removeClass('show');
-                contactButton.removeClass('scrolled reverting');
-            } else {
-                contactButton.addClass('scrolled');
-            }
-        } else {
-            contactButton.removeClass('scrolled');
-        }
-
-        lastScrollTop = currentScroll;
-    });
-
-    contactButton.on('click', function() {
-        if (contactPopup.hasClass('show')) {
-            contactButton.addClass('reverting');
-        } else {
-            contactButton.removeClass('reverting');
+    $(document).on('click touchstart', function(e) {
+        if (!$(e.target).closest('.navbar-toggler').length) {
+            navbarToggler.blur();
+            navbarToggler.removeClass('focus');
         }
     });
-});
-
-$(document).ready(function() {
-    const showReviewsBtn = document.getElementById('showReviews');
-    if (showReviewsBtn) {
-        showReviewsBtn.addEventListener('click', function() {
-            setTimeout(loadReviews, 300);
-        });
-    }
-
-    loadReviews();
 });
 
