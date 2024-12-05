@@ -362,7 +362,7 @@ document.getElementById("estimareForm").addEventListener("submit", async (event)
     const interval = document.getElementById("interval").value;
 
     const message = `
-🌿 Cerere nouă de contact client: 
+�� Cerere nouă de contact client: 
 
 👤 <b>Nume:</b> ${nume}
 
@@ -491,79 +491,90 @@ function loadReviews() {
         const reviews = snapshot.val();
         const reviewsContainer = document.querySelector('.testimonial-carousel');
         
+        if ($.fn.owlCarousel) {
+            $('.testimonial-carousel').owlCarousel('destroy');
+        }
+
         if (!reviews) {
             reviewsContainer.innerHTML = '';
             initializeCarousel();
             return;
         }
 
-        // Convert to array maintaining database order
         const reviewsArray = Object.entries(reviews)
             .map(([key, value]) => ({
                 ...value,
                 key
             }));
-        
-        if ($.fn.owlCarousel) {
-            $('.testimonial-carousel').owlCarousel('destroy');
-        }
-        
-        reviewsContainer.innerHTML = reviewsArray.map(review => `
-            <div class="testimonial-item bg-white rounded p-4 p-sm-5">
-                <div class="stars mb-2">
-                    ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
-                </div>
-                <h4>${review.name}</h4>
-                <h3 class="mb-3">${review.title}</h3>
-                <p class="fs-5">"${review.message}"</p>
-                <span>${review.city}</span>
-                <span>·</span>
-                <small class="text-muted">${review.service}</small>
-            </div>
-        `).join('');
 
-        // Initialize carousel with the last item as default position
+        const newerReviews = [...reviewsArray]
+            .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            
+        const olderReviews = [...reviewsArray]
+            .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+
+        const reviewsHTML = [...olderReviews.slice(1).reverse(), newerReviews[0], ...newerReviews.slice(1)]
+            .map(review => `
+                <div class="testimonial-item bg-white rounded p-4 p-sm-5">
+                    <div class="stars mb-2">
+                        ${'★'.repeat(review.rating || 5)}${'☆'.repeat(5 - (review.rating || 5))}
+                    </div>
+                    <h4>${review.name}</h4>
+                    <p class="fs-5">"${review.message}"</p>
+                    <span>${review.city || ''}</span>
+                    ${review.service ? `<span>·</span>
+                    <small class="text-muted">${review.service}</small>` : ''}
+                </div>
+            `).join('');
+
+        reviewsContainer.innerHTML = reviewsHTML;
+
         $('.testimonial-carousel').owlCarousel({
-            autoplay: false,
+            autoplay: true,
             smartSpeed: 1000,
             center: true,
             margin: 24,
             dots: true,
-            loop: true,
-            nav: true,
-            startPosition: reviewsArray.length - 1, // Start from last item
+            loop: reviewsArray.length > 1,
+            nav: reviewsArray.length > 1,
             items: 1,
+            startPosition: olderReviews.length - 1,
             navText: [
                 '<i class="bi bi-arrow-left"></i>',
                 '<i class="bi bi-arrow-right"></i>'
-            ]
-        });
+            ],
+            onInitialized: function(event) {
+                const owl = $('.testimonial-carousel').data('owl.carousel');
 
-        const mockReviews = document.querySelector('.mock-reviews');
-        if (mockReviews) {
-            mockReviews.style.display = reviewsArray.length > 0 ? 'none' : 'block';
-        }
+                $('.owl-prev').on('click', function(e) {
+                    e.preventDefault();
+                    const current = owl.relative(owl.current());
+                    
+                    if (current <= olderReviews.length) {
+                        owl.to(current - 1);
+                    } else {
+                        owl.prev();
+                    }
+                });
+            }
+        });
     });
 }
 
 function initializeCarousel(totalItems = 0) {
     $('.testimonial-carousel').owlCarousel({
-        autoplay: false, // Disabled autoplay to maintain position
+        autoplay: true,
         smartSpeed: 1000,
         center: true,
         margin: 24,
         dots: true,
         loop: totalItems > 1,
         nav: totalItems > 1,
-        startPosition: 0, // Always start with newest review
+        items: 1,
         navText: [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsive: {
-            0: { items: 1 },
-            768: { items: 1 }
-        }
+        ]
     });
 }
 
@@ -649,5 +660,16 @@ $(document).ready(function() {
             contactButton.removeClass('reverting');
         }
     });
+});
+
+$(document).ready(function() {
+    const showReviewsBtn = document.getElementById('showReviews');
+    if (showReviewsBtn) {
+        showReviewsBtn.addEventListener('click', function() {
+            setTimeout(loadReviews, 300);
+        });
+    }
+
+    loadReviews();
 });
 

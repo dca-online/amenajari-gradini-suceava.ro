@@ -960,27 +960,23 @@ html {
     transform: scale(1.05);
 }
 
-/* Remove focus styles */
 .contact-button:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
-/* Style for when popup is shown */
 .contact-popup.show ~ .contact-button {
     background-color: #6FBF73 !important;
     color: #ffffff !important;
     transform: scale(1.05);
 }
 
-/* Override active state when popup is shown */
 .contact-popup.show ~ .contact-button:active {
     background-color: #4CAF50 !important;
     color: #ffffff !important;
     transform: scale(1);
 }
 
-/* Force return to medium state after active */
 .contact-popup.show ~ .contact-button:not(:active) {
     background-color: #6FBF73 !important;
     color: #ffffff !important;
@@ -989,7 +985,7 @@ html {
 
 .contact-popup {
     position: fixed;
-    background: rgba(255, 255, 255, 0.7); /* Frosted glass effect */
+    background: rgba(255, 255, 255, 0.7); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
@@ -1009,7 +1005,6 @@ html {
     visibility: visible;
 }
 
-/* Mobile-specific styles */
 @media (max-width: 767px) {
     .contact-popup {
         display: flex;
@@ -1024,17 +1019,17 @@ html {
 
     .contact-button {
         position: fixed;
-        bottom: 20px; /* Ensure button is above the popup */
+        bottom: 20px; 
         right: 20px;
-        z-index: 1001; /* Ensure button is above the popup */
+        z-index: 1001;
     }
 }
 
 /* Desktop-specific styles */
 @media (min-width: 768px) {
     .contact-popup {
-        right: 20px; /* Adjust to be tangent to the button */
-        bottom: 100px; /* Adjust to be tangent to the button */
+        right: 20px;
+        bottom: 100px; 
         max-width: 75%;
     }
 }
@@ -1052,22 +1047,22 @@ html {
 .contact-popup-content-header {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #2C5E2A; /* Dark green color */
+    color: #2C5E2A;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
 }
 
 .contact-popup-content-header a {
-    margin-left: 20px; /* Space between icons */
-    color: #2C5E2A; /* Match the popup's text color */
-    border-color: #2C5E2A; /* Match the popup's border color */
+    margin-left: 20px;
+    color: #2C5E2A; 
+    border-color: #2C5E2A;
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-popup-content-header a:hover {
-    color: #789461; /* Hover color */
-    border-color: #789461; /* Hover border color */
+    color: #789461;
+    border-color: #789461;
 }
 
 .contact-popup-content p {
@@ -1078,11 +1073,11 @@ html {
     display: flex;
     align-items: center;
     gap: 12px;
-    border-bottom: 1px solid #348E38; /* Dark green line */
+    border-bottom: 1px solid #348E38;
 }
 
 .contact-popup-content p:last-child {
-    border-bottom: none; /* Remove border from last item */
+    border-bottom: none;
 }
 
 .contact-popup-content p i {
@@ -1109,13 +1104,12 @@ html {
     color: #ffffff;
     transition: background-color 0.3s ease;
 }
-/* Button style when popup is shown */
+
 .contact-popup.show ~ .contact-button {
     background-color: #6FBF73 !important;
     color: #ffffff !important;
 }
 
-/* Mobile-specific styles */
 @media (max-width: 767px) {
     .contact-popup.show ~ .contact-button:active {
         background-color: #DBE7C9 !important;
@@ -1124,19 +1118,18 @@ html {
     }
 
     .contact-popup.show ~ .contact-button:active i {
-        transform: scale(1.2); /* Enlarge the icon */
-        transition: transform 0.2s ease; /* Smooth transition */
+        transform: scale(1.2);
+        transition: transform 0.2s ease; 
     }
 }
 
-/* Desktop-specific styles */
 @media (min-width: 768px) {
     .contact-popup.show ~ .contact-button:active {
         background-color: #DBE7C9 !important;
         color: #ffffff !important;
     }
 
-    /* Ensure icon is white when menu is opened and button is pressed again */
+
     .contact-button.reverting {
         color: #ffffff !important;
     }
@@ -1146,7 +1139,6 @@ html {
     border-radius: 28px !important;
 }
 
-/* Form container frosted glass effect */
 #Estimare .bg-white.rounded {
     background: rgba(255, 255, 255, 0.65) !important;
     backdrop-filter: blur(16px);
@@ -1155,7 +1147,6 @@ html {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
-/* Form inputs and dropdowns frosted glass effect */
 #Estimare .form-control,
 #Estimare .form-select,
 #Estimare select.form-control {
@@ -1168,7 +1159,6 @@ html {
     color: var(--dark);
 }
 
-/* Hover state */
 #Estimare .form-control:hover,
 #Estimare .form-select:hover,
 #Estimare select.form-control:hover {
@@ -1176,7 +1166,6 @@ html {
     box-shadow: 0 4px 12px rgba(52, 142, 56, 0.08);
 }
 
-/* Focus state */
 #Estimare .form-control:focus,
 #Estimare .form-select:focus,
 #Estimare select.form-control:focus {
@@ -1185,7 +1174,6 @@ html {
     border-color: rgba(52, 142, 56, 0.5) !important;
 }
 
-/* Style form labels */
 #Estimare .form-floating label {
     color: var(--dark);
     opacity: 0.8;
@@ -1193,7 +1181,6 @@ html {
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
-/* Style dropdown options */
 #Estimare select.form-control option {
     background: rgba(255, 255, 255, 0.9);
     color: var(--dark);
@@ -1207,7 +1194,6 @@ html {
     color: var(--primary) !important;
 }
 
-/* Style the submit button */
 #Estimare .btn-primary {
     background: rgba(52, 142, 56, 0.9);
     backdrop-filter: blur(8px);
@@ -1223,7 +1209,6 @@ html {
     box-shadow: 0 6px 16px rgba(52, 142, 56, 0.2);
 }
 
-/* Service item hover state */
 .service-item:hover .service-text {
     background: rgba(15, 66, 41, 0.75) !important;
     backdrop-filter: blur(16px);
@@ -1234,7 +1219,6 @@ html {
     box-shadow: 0 8px 32px 0 rgba(15, 66, 41, 0.2);
 }
 
-/* Service text transitions */
 .service-item .service-text {
     position: relative;
     background: rgba(15, 66, 41, 0.75) !important;
@@ -1250,14 +1234,12 @@ html {
     box-shadow: 0 8px 32px 0 rgba(15, 66, 41, 0.2);
 }
 
-/* Text color in base state */
 .service-item .service-text h4,
 .service-item .service-text p {
     color: rgba(255, 255, 255, 0.95) !important;
     transition: color 0.5s ease-out;
 }
 
-/* Service text hover state */
 .service-item:hover .service-text {
     background: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(16px);
@@ -1268,13 +1250,11 @@ html {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
-/* Text color in hover state */
 .service-item:hover .service-text h4,
 .service-item:hover .service-text p {
     color: var(--dark) !important;
 }
 
-/* Ensure smooth transition for all properties */
 .service-item .service-text,
 .service-item:hover .service-text {
     transition-property: transform, background-color, backdrop-filter, -webkit-backdrop-filter, box-shadow, border-color;
@@ -1282,7 +1262,6 @@ html {
     transition-timing-function: ease-out;
 }
 
-/* Material You 3.0 style rounded corners for portfolio items */
 .portfolio-item {
     border-radius: 28px !important;
     overflow: hidden;
@@ -1299,7 +1278,7 @@ html {
     overflow: hidden;
 }
 
-/* Adjust the overlay corners */
+
 .portfolio-inner::before,
 .portfolio-inner::after {
     position: absolute;
@@ -1333,7 +1312,6 @@ html {
     -webkit-backdrop-filter: blur(16px);
 }
 
-/* Mobile-specific portfolio animations */
 @media (max-width: 767px) {
     .portfolio-inner::before,
     .portfolio-inner::after {
@@ -1355,14 +1333,13 @@ html {
         transition: width 0.5s ease-out, opacity 0.5s ease-out;
     }
 
-    /* Remove hover effects on mobile */
+
     .portfolio-inner:hover::before,
     .portfolio-inner:hover::after {
         width: 0;
     }
 }
 
-/* Portfolio text and buttons */
 .portfolio-inner .portfolio-text {
     position: absolute;
     width: 100%;
@@ -1386,7 +1363,6 @@ html {
     opacity: 1;
 }
 
-/* Mobile-specific animations */
 @media (max-width: 767px) {
     .portfolio-inner::before,
     .portfolio-inner::after {
@@ -1408,14 +1384,12 @@ html {
         transition: width 0.5s ease-out, opacity 0.5s ease-out;
     }
 
-    /* Remove hover effects on mobile */
     .portfolio-inner:hover::before,
     .portfolio-inner:hover::after {
         width: 0;
     }
 }
 
-/* Frosted glass button styles */
 .btn-roundUp {
     background: var(--primary) !important;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1444,26 +1418,22 @@ html {
     border-radius: 28px !important;
 }
 
-/* Remove default button focus outline */
 .btn-roundUp:focus {
     outline: none !important;
     box-shadow: 0 2px 8px rgba(15, 66, 41, 0.2) !important;
 }
 
-/* Sticky navbar button */
 .sticky-top .btn-roundUp {
     margin-right: 15px;
     padding: 15px 30px !important;
 }
 
-/* Navbar button */
 .navbar .btn-roundUp {
     height: auto !important;
     line-height: normal !important;
     padding: 15px 30px !important;
 }
 
-/* Mobile adjustments */
 @media (max-width: 767px) {
     .btn-roundUp {
         padding: 12px 24px !important;
@@ -1471,7 +1441,6 @@ html {
     }
 }
 
-/* Adjust navbar position on mobile */
 @media (max-width: 767px) {
     .navbar.sticky-top {
         max-width: calc(100% - 16px);
@@ -1481,7 +1450,6 @@ html {
     }
 }
 
-/* Update the scroll behavior in mobile view */
 @media (max-width: 767px) {
     .navbar.sticky-top {
         max-width: calc(100% - 16px);
