@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Gazon A-Z</title>
+    <title>Amenajări Grădini Gazon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,7 +51,7 @@
                 <div class="h-100 d-inline-flex align-items-center">
                     <span class="far fa-map-marker-alt me-2"></span>
                     <!-- <span>beuvexim@yahoo.com</span> -->
-                    <a style="color: #789461;" class="mb-2"><i style="color: #ececec; margin-top: 10px;" class="fa fa-map-marker-alt me-3"></i><a style="color:ececec;" href="https://maps.app.goo.gl/UiJ7NzAD6YwPkNFQA" target="_blank">Suceava, Șcheia, Str. Oborului 36</a>
+                    <a style="color: #789461;" class="mb-2"><i style="color: #ececec; margin-top: 10px;" class="fa fa-map-marker-alt me-3"></i><a style="color:ececec;" href="https://maps.app.goo.gl/UiJ7NzAD6YwPkNFQA" target="_blank">Suceava, Str. Oborului 36</a>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
@@ -66,7 +66,7 @@
 
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href="#Acasa" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-              <img src="./img/beu_transparent/1.png" width="100px" alt="Gazon">
+              <img src="img/transparent/3.png" width="100px" alt="Gazon">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -87,11 +87,11 @@
     </nav>
 
     
-    <div id="splash-container">
+    <!-- <div id="splash-container">
         <video autoplay muted playsinline id="splash-video">
             Your browser does not support the video tag.
         </video>
-    </div>
+    </div> -->
 
     <div id="Acasa" class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -143,7 +143,7 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-times text-primary"></i>
+                                <i class="feature-icon-round fa fa-times text-primary" style="color: white !important;"></i>
                             </div>
                             <div class="ps-3">
                                 <h4>Fără costuri ascunse</h4>
@@ -156,7 +156,7 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-users text-primary"></i>
+                                <i class="feature-icon-round fa fa-users text-primary" style="color: white !important;"></i>
                             </div>
                             <div class="ps-3">
                                 <h4>Echipă dedicată</h4>
@@ -169,7 +169,7 @@
                     <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
                         <div class="d-flex">
                             <div class="flex-shrink-0 btn-lg-square rounded-circle bg-light">
-                                <i class="fa fa-phone text-primary"></i>
+                                <i class="feature-icon-round fa fa-phone text-primary" style="color: white !important;"></i>
                             </div>
                             <div class="ps-3">
                                 <h4>Disponibili la nevoie</h4>
@@ -184,31 +184,73 @@
  
     <div class="container-xxl py-5">
         <div class="container">
-            <div class="row g-5 align-items-end">
+            <div class="row g-5 align-items-stretch">
                 <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <img class="roundImages img-fluid rounded" data-wow-delay="0.1s" src="img/imaginiGradini/IMG-20241119-WA0013.jpg">
+                    <div class="image-card h-100">
+                        <div id="featureCarousel" class="carousel slide h-100" data-bs-ride="carousel">
+                            <div class="carousel-inner h-100">
+                                <div class="carousel-item active">
+                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0013.jpg" alt="Gazon" style="object-fit: cover;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0077.jpg" alt="Gradina" style="object-fit: cover;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0081.jpg" alt="Grădină" style="object-fit: cover;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0080.jpg" alt="Grădini" style="object-fit: cover;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0075.jpg" alt="Gradini" style="object-fit: cover;">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#featureCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#featureCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                    <h1 class="display-1 text-primary mb-0">5</h1>
-                    <p class="text-primary mb-4">Ani de experiență</p>
-                    <h1 class="display-5 mb-4">Transformăm grădina în "acasă"</h1>
-                    <p class="mb-4"></p>
-                    <a class="btn-roundSimple btn btn-primary py-3 px-4" href="about.html">Vezi mai mult</a>
+                    <div class="content-card h-100 d-flex flex-column">
+                        <div class="experience-badge">
+                            <h1 class="display-1 mb-0">5</h1>
+                            <p class="mb-0">Ani de experiență</p>
+                        </div>
+                        <div class="content-spacing">
+                            <h1 class="display-5 mb-4 text-start">Transformăm grădina în "acasă"</h1>
+                        </div>
+                        <div class="mt-auto">
+                            <a class="btn-material" href="about.html">
+                                Vezi mai mult
+                                <i class="fa fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="row g-5">
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <div class="border-start ps-4">
-                                <i class="fa fa-award fa-3x text-primary mb-3"></i>
-                                <h4 class="mb-3">Servicii premium</h4>
-                                <span></span>
+                    <div class="features-card h-100 d-flex">
+                        <div class="feature-container my-auto">
+                            <div class="feature-item">
+                                <div class="feature-icon-round">
+                                    <i class="fa fa-award"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Servicii premium</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <div class="border-start ps-4">
-                                <i class="fa fa-users fa-3x text-primary mb-3"></i>
-                                <h4 class="mb-3">Echipă dedicată</h4>
-                                <span></span>
+                            <div class="feature-item">
+                                <div class="feature-icon-round">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Echipă dedicată</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -248,7 +290,7 @@
                                 <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
                                     <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                         <div class="btn-square bg-light rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                            <i class="fa fa-check fa-3x text-primary"></i>
+                                            <i class="feature-icon-round fa fa-check  text-primary" style="color: white !important;"></i>
                                         </div>
                                         <h4 class="mb-0">Satisfacție 100%</h4>
                                     </div>
@@ -256,7 +298,7 @@
                                 <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
                                     <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                         <div class="btn-square bg-light rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                            <i class="fa fa-users fa-3x text-primary"></i>
+                                            <i class="feature-icon-round fa fa-users text-primary" style="color: white !important;"></i>
                                         </div>
                                         <h4 class="mb-0">Echipă dedicată</h4>
                                     </div>
@@ -268,7 +310,7 @@
                                 <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
                                     <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                         <div class="btn-square bg-light rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                            <i class="fa fa-award fa-3x text-primary"></i>
+                                            <i class="feature-icon-round fa fa-award text-primary" style="color: white !important;"></i>
                                         </div>
                                         <h4 class="mb-0">Rezultate garantate</h4>
                                     </div>
@@ -276,7 +318,7 @@
                                 <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
                                     <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                         <div class="btn-square bg-light rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                            <i class="fa fa-tools fa-3x text-primary"></i>
+                                            <i class="feature-icon-round fa fa-tools text-primary" style="color: white !important;"></i>
                                         </div>
                                         <h4 class="mb-0">Echipament modern</h4>
                                     </div>
@@ -391,7 +433,7 @@
     </div>
 
     <form id="estimareForm" class="row g-3">
-    <div id="Estimare" class="container-fluid quote my-5 py-5" data-parallax="scroll" data-image-src="img/imaginiGradini/IMG-20241119-WA0018.jpg">
+    <div id="Estimare" class="container-fluid quote my-5 py-5" data-parallax="scroll" data-image-src="img/imaginiGradini/IMG-20241119-WA0086.jpg">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
@@ -492,7 +534,7 @@
                                 </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button class="btn-roundSimple btn btn-primary py-3 px-4" type="submit">Trimite</button>
+                                <button class="btn-material" style="margin-top: 10px;" type="submit">Trimite</button>
                             </div>
                         </form>
                         </div>
@@ -620,7 +662,7 @@
                             </div>
                             <p class="fs-5">"Servicii excelente de amenajare. Echipa a fost foarte profesionistă!"</p>
                             <h4>Ioan Popescu</h4>
-                            <span>Bucure��ti</span>
+                            <span>Bucureti</span>
                             <span>·</span>
                             <small class="text-muted">Amenajare Grădină</small>
                         </div>
@@ -656,7 +698,7 @@
                         <div class="form-floating mb-3">
                             <select class="form-select bg-light border-0" id="reviewService" required>
                                 <option value="">Selectează serviciul</option>
-                                <option value="Peisagistică">Peisagistic��</option>
+                                <option value="Peisagistică">Peisagistică</option>
                                 <option value="Mentenață grădină">Mentenață grădină</option>
                                 <option value="Mentenanță plante">Mentenanță plante</option>
                                 <option value="Irigare și drenaj">Irigare și drenaj</option>
@@ -772,7 +814,7 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><a style="color:#789461;" href="https://maps.app.goo.gl/UiJ7NzAD6YwPkNFQA" target="_blank">Suceava, Șcheia, Str. Oborului 36</a></p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><a style="color:#789461;" href="https://maps.app.goo.gl/UiJ7NzAD6YwPkNFQA" target="_blank">Suceava, Str. Oborului 36</a></p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><a style="color: #ececec;" href="tel:+40754895951">+40 754 895 951 </a></p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i><a style="color: #ececec;" href='mailto:beuvexim@yahoo.com?subject=Mesaj&body=Bună ziua, vin cu urmatoarele întrebări:'>Email</a></p>
                     <div class="d-flex pt-2">
@@ -812,7 +854,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">Gazon A-Z</a>, Toate drepturile rezervate.
+                    &copy; <a class="border-bottom" href="#">Amenajări Grădini Gazon</a>, Toate drepturile rezervate.
                 </div>
 
             </div>

@@ -143,85 +143,42 @@
         }
     });
 
-})(jQuery);
-document.addEventListener("DOMContentLoaded", function () {
-    const splashContainer = document.getElementById('splash-container');
-    const splashVideo = document.getElementById('splash-video');
-    const body = document.body;
-
-    const videoSources = {
-        mobile: 'img/imaginiGradini/GazonAZVideoPhone3.mp4',
-        mobileWide: 'img/imaginiGradini/1080x2560fast.mp4',
-        tablet: 'img/imaginiGardini/1080x2560fast.mp4',
-        largeDevices: 'img/imaginiGradini/1920x1080fast.mp4',
-        desktop: 'img/imaginiGardini/1920x1080fast.mp4'
-    };
-
-    function getVideoSource() {
-        const screenWidth = window.innerWidth;
-        console.log('Screen width:', screenWidth);
-        
-        if (screenWidth <= 600) {
-            console.log('Selecting mobile');
-            return videoSources.mobile;
-        }
-        if (screenWidth <= 1024) {
-            console.log('Selecting mobile wide');
-            return videoSources.mobileWide;
-        }
-        if (screenWidth <= 1366) {
-            console.log('Selecting tablet');
-            return videoSources.tablet;
-        }
-        if (screenWidth <= 1920) {
-            console.log('Selecting large devices');
-            return videoSources.largeDevices;
-        }
-        console.log('Selecting desktop');
-        return videoSources.desktop;
-    }
-
-    function setVideoSource() {
-        const source = getVideoSource();
-        console.log('Full source path:', source);
-        
-        splashVideo.src = source;
-        splashVideo.load();
-        
-        splashVideo.onloadedmetadata = () => {
-            console.log('Metadata loaded, attempting to play');
-            splashVideo.play().catch(error => {
-                console.error('Autoplay error:', error);
-
-                hideSplashScreen();
-            });
-        };
-
-        splashVideo.onerror = (e) => {
-            console.error('Video error:', e);
-
-            hideSplashScreen();
-        };
-    }
-
-    function hideSplashScreen() {
-        splashContainer.classList.add('hidden');
-        body.classList.add('loaded');
-        setTimeout(() => {
-            splashContainer.style.display = 'none';
-        }, 500);
-    }
-
-    setVideoSource();
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(setVideoSource, 250);
+    $(document).ready(function() {
+        $('#featureCarousel').carousel({
+            interval: 3000,
+            ride: 'carousel',
+            pause: 'hover'
+        });
     });
 
-    splashVideo.addEventListener('ended', hideSplashScreen);
-    setTimeout(hideSplashScreen, 2000);
+    $(document).ready(function() {
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleCarouselVisibility() {
+            const carousel = document.querySelector('#featureCarousel');
+            if (carousel) {
+                if (isElementInViewport(carousel)) {
+                    carousel.classList.add('in-viewport');
+                } else {
+                    carousel.classList.remove('in-viewport');
+                }
+            }
+        }
+
+        $(window).on('scroll resize', handleCarouselVisibility);
+        
+        handleCarouselVisibility();
+    });
+
+})(jQuery);
 
 
     if (typeof db !== 'undefined') {
@@ -322,7 +279,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert('Eroare: ' + (error.message || 'A apărut o eroare neașteptată'));
             });
     });
-});
 
 const telegramBotToken = "8005755711:AAHSNRERi5O0jAosJc1FYkJd6OFxlcwS97U";
 const telegramChatId = "5269217303";
@@ -580,3 +536,11 @@ $(document).ready(function() {
     });
 });
 
+function showReviewForm() {
+    const reviewSection = document.querySelector('.review-container');
+    reviewSection.classList.add('review-section-transitioning');
+    
+    setTimeout(() => {
+        document.getElementById('review-form').classList.add('active');
+    }, 300);
+}
