@@ -24,11 +24,22 @@
     --secondary: #525368;
     --light: #E8F5E9;
     --dark: #0F4229;
+} 
+
+* {
+    font-family: "DM Sans", serif;
+    font-optical-sizing: auto !important;
+    font-weight: 500;
+    font-style: normal !important;
 }
 
 html {
     scroll-behavior: smooth;
-  }
+    font-family: "DM Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }  
   
 .back-to-top {
     position: fixed;
@@ -43,7 +54,10 @@ h1,
 h2,
 .h2,
 .fw-bold {
-    font-weight: 700 !important;
+    font-family: "DM Sans", serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
 }
 
 h3,
@@ -51,7 +65,10 @@ h3,
 h4,
 .h4,
 .fw-medium {
-    font-weight: 600 !important;
+    font-family: "DM Sans", serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
 }
 
 h5,
@@ -59,8 +76,12 @@ h5,
 h6,
 .h6,
 .fw-semi-bold {
+    font-family: "DM Sans", serif !important;
+    font-optical-sizing: auto !important;
     font-weight: 500 !important;
+    font-style: normal !important;
 }
+
 
 #spinner {
     opacity: 0;
@@ -243,7 +264,7 @@ h6,
 }
 
 .page-header {
-    background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../img/imaginiGradini/IMG-20241119-WA0010.jpg) center center no-repeat;
+    background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)), url(../images/IMG-20241119-WA0010.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -1574,6 +1595,10 @@ html {
     .portfolio-inner:hover::after {
         width: 0;
     }
+}
+
+.portfolio-item .portfolio-text {
+    margin-bottom: 50px !important;
 }
 
 .btn-roundUp {
