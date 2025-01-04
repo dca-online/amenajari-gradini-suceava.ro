@@ -1765,33 +1765,58 @@ html {
 }
 
 .experience-badge {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    background: var(--light);
-    border-radius: 28px;
-    transition: all 0.3s ease;
-}
-
-.experience-badge:hover {
-    background: var(--dark);
-}
-
-.experience-badge:hover h1,
-.experience-badge:hover p {
-    color: white;
+    background-color: var(--light);
+    border-radius: 50px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    margin-bottom: 2rem;
 }
 
 .experience-badge h1 {
-    color: var(--dark);
+    color: var(--primary);
+    font-size: 2.5rem;
     margin: 0;
     line-height: 1;
+    font-weight: 600;
 }
 
 .experience-badge p {
-    font-size: 1.2rem;
-    color: var(--dark);
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+@media (max-width: 991px) {
+    .experience-badge {
+        padding: 10px 20px;
+        margin: 1rem 0;
+    }
+    
+    .experience-badge h1 {
+        font-size: 2rem;
+    }
+    
+    .experience-badge p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .experience-badge {
+        padding: 8px 16px;
+    }
+    
+    .experience-badge h1 {
+        font-size: 1.75rem;
+    }
+    
+    .experience-badge p {
+        font-size: 0.9rem;
+    }
 }
 
 .btn-material {
@@ -2316,3 +2341,492 @@ html {
 
 }
 
+.rightCarousel img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;   
+}
+
+.rightCarousel {
+    text-align: justify;
+}
+
+.textDespre {
+    text-align: justify;
+}
+
+.textDespre {
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 16px auto;
+    max-width: 800px;
+  }
+  
+  .textDespre h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e88e5;
+    margin-bottom: 16px;
+  }
+  
+  .textDespre p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: #5f6368;
+  }
+
+  .textDespre ul {
+    padding-left: 20px;
+    margin-top: 8px;
+  }
+  
+  .textDespre li {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: #3c4043;
+  }
+  
+  .textDespre br {
+    margin-bottom: 16px;
+  }
+  
+  .textDespre strong {
+    color: #d32f2f;
+  }
+  
+  @media (max-width: 600px) {
+    .textDespre {
+      padding: 12px;
+    }
+  
+    .textDespre h1 {
+      font-size: 1.25rem;
+    }
+  
+    .textDespre li {
+      font-size: 0.9rem;
+    }
+  }
+
+@media (max-width: 600px) {
+    .counter {
+        opacity: 1 !important; 
+        transition: opacity 0.3s ease;
+    }
+}
+
+.wideCarousel {
+    max-width: 100vw;
+    max-height: 100%
+}
+
+.middleCard {
+    max-width: 50% !important;
+    height: 100%;
+}
+
+.breadcrumbItems {
+    max-width: 50%;
+    background: none !important;
+}
+
+.badge {
+    border-radius: 20px;
+    color: #0F4229;
+    background-color: #E8F5E9;
+}
+
+.custom-badge {
+    background-color: #E8F5E9;
+    color: #071d12;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px; 
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+custom-badge me-3 {
+    text-align: left;
+}
+
+.side-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.side-card {
+    flex: 1;
+    height: calc(50% - 10px);
+    min-height: 250px;
+    position: relative;
+}
+
+.side-card .image-card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.side-card .image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.side-card .image-card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.side-card .carousel,
+.side-card .carousel-inner,
+.side-card .carousel-item {
+    height: 100%;
+}
+
+.side-card .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-card {
+    height: 450px;
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    .image-card {
+        height: 300px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .wideCarousel .col-lg-3:first-child {
+        display: none;
+    }
+
+    .middleCard {
+        max-width: 100% !important;
+        padding: 15px;
+    }
+
+    .content-card {
+        padding: 1.5rem;
+        width: 100%;
+        margin: 0;
+    }
+
+    .experience-badge {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
+
+    .experience-badge h1 {
+        font-size: 2.5rem;
+        margin-right: 1rem;
+    }
+
+    .content-spacing {
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    .content-spacing h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-card {
+        padding: 1rem;
+    }
+
+    .experience-badge {
+        padding: 0.75rem 1rem;
+    }
+
+    .experience-badge h1 {
+        font-size: 2rem;
+    }
+
+    .content-spacing h1 {
+        font-size: 1.5rem;
+    }
+
+    .custom-badge {
+        padding: 1rem;
+    }
+}
+
+.experience-badge {
+    background-color: var(--light);
+    border-radius: 28px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    margin-bottom: 2rem;
+}
+
+.experience-badge h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin: 0;
+    line-height: 1;
+}
+
+.experience-badge p {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.content-card {
+    padding: 2rem;
+    height: 100%;
+    background: white;
+    border-radius: 28px;
+}
+
+@media (max-width: 991px) {
+    .middleCard {
+        padding: 0 15px;
+        width: 100%;
+    }
+    
+    .content-card {
+        padding: 1.5rem;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .experience-badge {
+        margin: 0.5rem 0 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .content-spacing h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    h1 {
+        font-size: 3rem !important;
+        line-height: 1.6;
+        margin: 1rem 0 !important;
+        padding: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-card {
+        padding: 1.25rem;
+    }
+    
+    .experience-badge {
+        padding: 0.5rem 1rem;
+    }
+    
+    .experience-badge h1 {
+        --primary: #348E38;
+        --secondary: #525368;
+        --light: #E8F5E9;
+        --dark: #0F4229;
+        font-size: 1rem;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        --bs-gutter-x: 3rem;
+        --bs-gutter-y: 3rem;
+        visibility: visible;
+        box-sizing: border-box;
+
+        font-family: "DM Sans", serif;
+        font-optical-sizing: auto !important;
+        font-weight: 500;
+        font-style: normal !important;
+        margin-right: 1rem !important;
+        background-color: #E8F5E9;
+        color: #071d12;
+        border-radius: 20px;
+        padding: 15px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        margin-bottom: 15px;
+
+    }
+        @media (min-width: 1200px){
+
+        }
+    }
+    
+    .content-spacing h1 {
+        font-size: 1.5rem;
+    }
+
+.experience-badgeUp {
+    --primary: #348E38;
+    --secondary: #525368;
+    --light: #E8F5E9;
+    --dark: #0F4229;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #525368;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    --bs-gutter-x: 3rem;
+    --bs-gutter-y: 3rem;
+    visibility: visible;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: "DM Sans", serif;
+    font-optical-sizing: auto !important;
+    font-weight: 500;
+    font-style: normal !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem;
+    background: var(--light);
+    border-radius: 28px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+}
+
+@media (m-width: 991px) {
+    .middleCard {
+        padding: 0 15px;
+        width: 100%;
+    }
+    
+    .content-card {
+        padding: 1.5rem;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .experience-badge {
+        margin: 0.5rem 0 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .content-spacing h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    h1 {
+        font-size: 3rem !important;
+        line-height: 1.6;
+        margin: 1rem 0 !important;
+        padding: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-card {
+        padding: 1.25rem;
+    }
+    
+    .experience-badge {
+        padding: 0.5rem 1rem;
+    }
+    
+    .experience-badge h1 {
+        --primary: #348E38;
+        --secondary: #525368;
+        --light: #E8F5E9;
+        --dark: #0F4229;
+        font-size: 1rem;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        --bs-gutter-x: 3rem;
+        --bs-gutter-y: 3rem;
+        visibility: visible;
+        box-sizing: border-box;
+        font-family: "DM Sans", serif;
+        font-optical-sizing: auto !important;
+        font-weight: 500;
+        font-style: normal !important;
+        margin-right: 1rem !important;
+        background-color: #E8F5E9;
+        color: #071d12;
+        border-radius: 20px;
+        padding: 15px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        margin-bottom: 15px;
+
+    }
+        @media (min-width: 1200px){
+
+        }
+    }
+    
+    .content-spacing h1 {
+        font-size: 1.5rem;
+    }
+
+/* Add these styles for the side columns */
+@media (min-width: 992px) {
+    .wideCarousel .col-lg-3 {
+        flex: 0 0 auto;
+        width: 30%; /* Increase from default 25% (col-lg-3) to 30% */
+    }
+
+    /* Keep middle card at its original width */
+    .wideCarousel .middleCard.col-lg-6 {
+        flex: 0 0 auto;
+        width: 40%; /* Adjust to accommodate wider side cards */
+    }
+}
+
+/* Maintain existing mobile responsive behavior */
+@media (max-width: 991px) {
+    .wideCarousel .col-lg-3:first-child {
+        display: none;
+    }
+    
+    .middleCard {
+        max-width: 100% !important;
+        padding: 15px;
+    }
+}

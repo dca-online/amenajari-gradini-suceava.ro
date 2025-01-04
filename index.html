@@ -20,6 +20,7 @@
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon/favicon-16x16.png" sizes="16x16" type="image/png">
      <link rel="icon" href="img/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -74,11 +75,11 @@
                 <a href="index.html" class="nav-item nav-link active">Acasă</a>
                 <a href="#Despre" class="nav-item nav-link">Despre noi</a>
                 <a href="#Servicii" class="nav-item nav-link">Servicii</a>
-                <a href="#Proiecte" class="nav-item nav-link">Proiecte</a>
+                <a href="#Proiecte" class="nav-item nav-link">Portofoliu</a>
                 <div class="nav-item dropdown">
                     
                 </div>
-                <a href="#Contact" class="nav-item nav-link">Contact</a>
+                <a href="#contact-popup" class="nav-item nav-link">Contact</a>
             </div>
             <a href="#Estimare" class="btn-roundUp btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Obține o estimare<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
@@ -188,19 +189,19 @@
                         <div id="featureCarousel" class="carousel slide h-100" data-bs-ride="carousel">
                             <div class="carousel-inner h-100">
                                 <div class="carousel-item active">
-                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0013.jpg" alt="Gazon" style="object-fit: cover;">
+                                    <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0013.jpg" alt="Gazon" style="object-fit: cover; height: 100%;">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0077.jpg" alt="Gradina" style="object-fit: cover;">
+                                    <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0077.jpg" alt="Gradina" style="object-fit: cover; height: 100%;">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0081.jpg" alt="Grădină" style="object-fit: cover;">
+                                    <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0081.jpg" alt="Grădină" style="object-fit: cover; height: 100%;">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0080.jpg" alt="Grădini" style="object-fit: cover;">
+                                    <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0080.jpg" alt="Grădini" style="object-fit: cover; height: 100%;">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="img-fluid h-100 w-100" src="img/imaginiGradini/IMG-20241119-WA0075.jpg" alt="Gradini" style="object-fit: cover;">
+                                    <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0075.jpg" alt="Gradini" style="object-fit: cover; height: 100%;">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#featureCarousel" data-bs-slide="prev">
@@ -214,14 +215,58 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                     <div class="content-card h-100 d-flex flex-column">
-                        <div class="experience-badge">
+                        <div  style="--primary: #348E38 !important;
+                        --secondary: #525368 !important;
+                        --light: #E8F5E9 !important;
+                        --dark: #0F4229 !important;
+                        font-size: 1rem !important;
+                        line-height: 1.5 !important;
+                        color: #525368 !important;
+                        -webkit-text-size-adjust: 100% !important;
+                        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+                        --bs-gutter-x: 3rem !important;
+                        --bs-gutter-y: 3rem !important;
+                        visibility: visible !important;
+                        text-align: center !important;
+                        box-sizing: border-box !important;
+                        font-family: DM Sans, serif ;
+                        font-optical-sizing: auto !important;
+                        font-weight: 500;
+                        font-style: normal !important;
+                        display: inline-flex;
+                        align-items: baseline;
+                        gap: 1rem;
+                        padding: 1rem 2rem;
+                        background: var(--light);
+                        border-radius: 28px;
+                        transition: all 0.3s ease;">
                             <h1 class="display-1 mb-0">5</h1>
                             <p class="mb-0">Ani de experiență</p>
                         </div>
                         <div class="content-spacing">
-                            <h1 class="display-5 mb-4 text-start">Transformăm grădina în "acasă"</h1>
+                            <h1 class="display-5 mb-4 text-start" style="font-family: DM Sans, serif !important;
+                            --primary: #348E38;
+                            --secondary: #525368;
+                            --light: #E8F5E9;
+                            --dark: #0F4229;
+                            -webkit-text-size-adjust: 100%;
+                            -webkit-tap-highlight-color: rgba(0,0,0,0);
+                            --bs-gutter-x: 3rem;
+                            --bs-gutter-y: 3rem;
+                            visibility: visible;
+                            box-sizing: border-box;
+                            color: #0F4229;
+                            font-optical-sizing: auto !important;
+                            font-weight: 500 !important;
+                            font-style: normal !important;
+                            font-size: 3rem !important;
+                            margin: 1rem 0 !important;
+                            padding: 0;
+                            margin-bottom: 1.5rem !important;
+                            text-align: left !important;
+                            line-height: 1.3;">Transformăm grădina în "acasă"</h1>
                         </div>
                         <div class="mt-auto">
                             <a class="btn-material" href="#">
@@ -261,12 +306,24 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <h1 class="display-4 text-white" data-toggle="counter-up">500</h1>
+                    <h6 style="color: white !important;">Peste</h6>
+                    <h1 class="display-4 text-white" data-toggle="counter-up">400</h1>
                     <span class="fs-5 fw-semi-bold text-light">Clienți fericiți</span>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <h1 class="display-4 text-white" data-toggle="counter-up">150</h1>
-                    <span class="fs-5 fw-semi-bold text-light">Grădini făcute</span>
+                    <h6 style="color: white !important;">Peste</h6>
+                    <h1 class="display-4 text-white" data-toggle="counter-up">200</h1>
+                    <span class="fs-5 fw-semi-bold text-light">Proiecte finalizate</span>
+                </div>
+                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+                    <h6 style="color: white !important;">Peste</h6>
+                    <h1 class="display-4 text-white" data-toggle="counter-up">100</h1>
+                    <span class="fs-5 fw-semi-bold text-light">Lucrări efectuate</span>
+                </div>
+                <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+                    <h6 style="color: white !important;">Peste</h6>
+                    <h1 class="display-4 text-white" data-toggle="counter-up">15000</h1>
+                    <span class="fs-5 fw-semi-bold text-light">Ore lucrate</span>
                 </div>
             </div>
         </div>
@@ -827,8 +884,9 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Link-uri rapide</h4>
                     <a class="btn btn-link" href="#Despre">Despre noi</a>
-                    <a class="btn btn-link" href="#">Contact</a>
                     <a class="btn btn-link" href="#">Servicii</a>
+                    <a class="btn btn-link" href="#">Portofoliu</a>
+                    <a class="btn btn-link" href="#">Contact</a>
                     <a class="btn btn-link" href="">Termeni și condiții</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
