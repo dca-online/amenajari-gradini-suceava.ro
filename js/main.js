@@ -5,6 +5,9 @@
         setTimeout(function () {
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
+                if (portfolioIsotope) {
+                    portfolioIsotope.isotope('layout');
+                }
             }
         }, 1);
     };
@@ -37,10 +40,21 @@
         time: 2000
     });
 
-    var portfolioIsotope = $('.portfolio-container').isotope({
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-    });
+    var portfolioIsotope;
+
+    function initPortfolioIsotope() {
+        if ($('.portfolio-container').length) {
+            portfolioIsotope = $('.portfolio-container').isotope({
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                initLayout: true
+            });
+            
+            setTimeout(function() {
+                portfolioIsotope.isotope('layout');
+            }, 100);
+        }
+    }
 
     $('#portfolio-flters li').on('click', function () {
         $("#portfolio-flters li").removeClass('active');
@@ -176,6 +190,24 @@
         $(window).on('scroll resize', handleCarouselVisibility);
         
         handleCarouselVisibility();
+    });
+
+    $(document).ready(function() {
+        $('.portfolio-container').imagesLoaded(function() {
+            initPortfolioIsotope();
+        });
+
+        $(window).on('resize', function() {
+            if (portfolioIsotope) {
+                portfolioIsotope.isotope('layout');
+            }
+        });
+
+        $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function() {
+            if (portfolioIsotope) {
+                portfolioIsotope.isotope('layout');
+            }
+        });
     });
 
 })(jQuery);
@@ -544,3 +576,152 @@ function showReviewForm() {
         document.getElementById('review-form').classList.add('active');
     }, 300);
 }
+
+function initializePortfolio() {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        const portfolioItems = document.querySelectorAll('.portfolio-inner');
+        portfolioItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.classList.add('active');
+            });
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('active');
+            });
+        });
+    } else {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const rect = entry.target.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const elementMiddle = rect.top + (rect.height / 2);
+                const viewportMiddle = windowHeight / 2;
+                
+                const distanceFromCenter = Math.abs(elementMiddle - viewportMiddle);
+                const threshold = windowHeight * 0.2;
+                
+                if (distanceFromCenter < threshold) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: [0, 0.5, 1.0],
+        });
+
+        document.querySelectorAll('.portfolio-inner').forEach(item => {
+            observer.observe(item);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.portfolio-inner')) {
+        initializePortfolio();
+    }
+});
+
+window.addEventListener('load', () => {
+    if (document.querySelector('.portfolio-inner')) {
+        initializePortfolio();
+    }
+});
+
+$(document).ready(function() {
+    $('.btn-estimate').on('click', function(e) {
+        if (window.innerWidth < 992) {
+            e.preventDefault();
+            
+            $('.navbar-collapse').collapse('hide');
+            
+            setTimeout(function() {
+
+                const estimareSection = document.getElementById('Estimare');
+                if (estimareSection) {
+                    estimareSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+    });
+});
+
+function initializePortfolioPortofoliu() {
+    const isPortfolioPage = document.body.classList.contains('portofoliu');
+    
+    if (isPortfolioPage && window.matchMedia("(max-width: 991.98px)").matches) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const rect = entry.target.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const elementMiddle = rect.top + (rect.height / 2);
+                const viewportMiddle = windowHeight / 2;
+
+                const distanceFromCenter = Math.abs(elementMiddle - viewportMiddle);
+                const threshold = windowHeight * 0.2;
+
+                if (distanceFromCenter < threshold) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: [0, 0.5, 1.0],
+            rootMargin: '-20% 0px'
+        });
+        
+        document.querySelectorAll('.portfolio-inner-custom').forEach(item => {
+            observer.observe(item);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializePortfolioPortofoliu();
+});
+
+window.addEventListener('load', () => {
+    initializePortfolioPortofoliu();
+});
+
+function initializePortofoliuScroll() {
+    const isPortofoliuPage = document.body.classList.contains('portofoliu');
+    
+    if (isPortofoliuPage && window.matchMedia("(max-width: 991.98px)").matches) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const rect = entry.target.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const elementMiddle = rect.top + (rect.height / 2);
+                const viewportMiddle = windowHeight / 2;
+                
+                const distanceFromCenter = Math.abs(elementMiddle - viewportMiddle);
+                const threshold = windowHeight * 0.2;
+                
+                if (distanceFromCenter < threshold) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: [0, 0.5, 1.0],
+            rootMargin: '-20% 0px'
+        });
+        
+        const portfolioItems = document.querySelectorAll('.portfolio-inner-custom');
+        if (portfolioItems.length > 0) {
+            portfolioItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializePortofoliuScroll();
+});
+
+window.addEventListener('load', () => {
+    initializePortofoliuScroll();
+});
