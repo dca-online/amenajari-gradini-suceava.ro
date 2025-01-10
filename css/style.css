@@ -2971,13 +2971,11 @@ custom-badge me-3 {
 }
 
 @media (max-width: 400px) {
-    /* Remove special styling for Grădinărit card to maintain consistency */
     .portfolio-inner[data-category="gradinarit"] .portfolio-text h4 {
-        transform: translateY(5px);  /* Same as other cards */
+        transform: translateY(5px);
         margin-bottom: 10px !important;
     }
 
-    /* Keep consistent styling for all cards */
     .portfolio-inner .portfolio-text h4 {
         transform: translateY(5px);
         margin-bottom: 10px !important;
@@ -2985,7 +2983,6 @@ custom-badge me-3 {
 }
 
 @media (min-width: 768px) and (max-width: 845px) {
-    /* Remove special styling for Grădinărit card */
     .portfolio-inner[data-category="gradinarit"] .portfolio-text h4 {
         transform: translateY(5px);
         margin-bottom: 10px !important;
@@ -2993,19 +2990,16 @@ custom-badge me-3 {
 }
 
 @media (min-width: 991px) and (max-width: 1305px) {
-    /* Keep special text styling for Grădinărit card */
     .portfolio-inner[data-category="gradinarit"] .portfolio-text h4 {
         transform: translateY(5px);
         margin-bottom: 10px !important;
     }
 
-    /* Move buttons slightly higher, but less than before */
     .portfolio-inner[data-category="gradinarit"] .portfolio-text .d-flex {
         transform: translateY(-5px);
     }
 }
 
-/* Add consistent spacing for all portfolio text containers */
 .portfolio-text {
     display: flex;
     flex-direction: column;
@@ -3014,7 +3008,6 @@ custom-badge me-3 {
     padding: 20px;
 }
 
-/* Ensure consistent button positioning */
 .portfolio-text .d-flex {
     margin-top: 0;
 }
