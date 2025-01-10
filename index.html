@@ -409,6 +409,11 @@
                             <h4 class="mb-3">Peisagistică</h4>
                             <p class="mb-4"></p>
                         </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="services-size col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -422,6 +427,11 @@
                             </div>
                             <h4 class="mb-3">Mentenanță plante</h4>
                             <p class="mb-4"></p>
+                        </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -437,6 +447,11 @@
                             <h4 class="mb-3">Mentenață grădină</h4>
                             <p class="mb-4"></p>
                         </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="services-size col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -450,6 +465,11 @@
                             </div>
                             <h4 class="mb-3">Irigare și drenaj</h4>
                             <p class="mb-4"></p>
+                        </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -465,6 +485,11 @@
                             <h4 class="mb-3">Tehnologii de grădină</h4>
                             <p class="mb-4"></p>
                         </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="services-size col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -479,6 +504,11 @@
                             <h4 class="mb-3">Grădinărit și Peisagistică urbană</h4>
                             <p class="mb-4"></p>
                             <!-- <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>Vezi mai mul</a> -->
+                        </div>
+                        <div class="service-text-right">
+                            <button class="btn-service-more">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -598,69 +628,86 @@
         </div>
     </div>
 
-    <div id="Portofoliu" class="container-xxl py-5">
+    <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-bold text-primary">Proiectele noastre</p>
+                <p class="fs-5 fw-bold text-primary">Proiectele Noastre</p>
                 <h1 class="display-5 mb-5">Unele dintre lucrările noastre minunate</h1>
             </div>
             <div class="row wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline rounded mb-5" id="portfolio-flters">
                         <li class="mx-2 active" data-filter="*">Toate</li>
-                        <li class="mx-2" data-filter=".first">Terminate</li>
-                        <li class="mx-2" data-filter=".second">Proiecte în lucru</li>
+                        <li class="mx-2" data-filter=".peisagistica">Peisagistică</li>
+                        <li class="mx-2" data-filter=".mentenanta-plante">Mentenanță plante</li>
+                        <li class="mx-2" data-filter=".mentenanta-gradina">Mentenanță grădină</li>
+                        <li class="mx-2" data-filter=".irigare-drenaj">Irigare și drenaj</li>
+                        <li class="mx-2" data-filter=".tehnologii">Tehnologii de grădină</li>
+                        <li class="mx-2" data-filter=".gradinarit">Grădinărit și Peisagistică urbană</li>
                     </ul>
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
                 <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0046.jpg
-                        " alt="">
+                    <div class="portfolio-inner">
+                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0046.jpg" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Peisagistică</h4>
-                            <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0046.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#peisagisticaModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.3s">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0032.jpg
-                        " alt="">
+                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0032.jpg" alt="">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">Mentenanță plante
-                            </h4>
+                            <h4 class="text-white mb-4">Mentenanță plante</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0032.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#mentenantaPlanteModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                    <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.5s">
                     <div class="portfolio-inner rounded">
                         <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0078.jpg" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Mentenață grădină</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0078.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#mentenantaGradinaModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.5s">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0073.jpg" height="300px" alt="Irigatii">
+                        <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0073.jpg" alt="Irigatii">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Irigare și drenaj</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0073.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#irigareModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -671,22 +718,160 @@
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Tehnologii de grădină</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0070.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#tehnologiiModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.1s">
                     <div class="portfolio-inner rounded" data-category="gradinarit">
                         <img class="img-fluid" src="img/imaginiGradini/IMG-20241119-WA0047.jpg" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Grădinărit și Peisagistică urbană</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/imaginiGradini/IMG-20241119-WA0047.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="portofoliu.html"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="#" data-bs-toggle="modal" data-bs-target="#gradinaritModal">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="">
+                                    <i class="fa fa-link"></i>
+                                </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="peisagisticaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Peisagistică - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0046.jpg" data-lightbox="peisagistica-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0046.jpg" alt="Peisagistică">
+                            </a>
+                        </div>
+                        <div class="col-md-4"></div>
+                            <a href="img/imaginiGradini/IMG-20241119-WA0046.jpg" data-lightbox="peisagistica-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0046.jpg" alt="Peisagistică">
+                            </a>
+                        </div>
+                        <div class="col-md-4"></div>
+                            <a href="img/imaginiGradini/IMG-20241119-WA0046.jpg" data-lightbox="peisagistica-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0046.jpg" alt="Peisagistică">
+                            </a>
+                        </div>
+                        <!-- Add more images-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mentenantaPlanteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mentenanță Plante - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0032.jpg" data-lightbox="mentenanta-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0032.jpg" alt="Mentenanță Plante">
+                            </a>
+                        </div>
+                        <!-- Add more images -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mentenantaGradinaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mentenanță grădină - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0078.jpg" data-lightbox="mentenanta-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0078.jpg" alt="Mentenanță grădină">
+                            </a>
+                        </div>
+                        <!-- Add more images  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="gradinaritModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Grădinărit și Peisagistică urbană - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0047.jpg" data-lightbox="gradinarit-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0047.jpg" alt="Grădinărit și Peisagistică urbană">
+                            </a>
+                        </div>
+                        <!-- Add more images  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="irigareModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Irigare și drenaj - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0073.jpg" data-lightbox="irigare-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0073.jpg" alt="Irigare și drenaj">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="tehnologiiModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tehnologii de grădină - Galerie Foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <a href="img/imaginiGradini/IMG-20241119-WA0070.jpg" data-lightbox="tehnologii-gallery">
+                                <img class="img-fluid rounded" src="img/imaginiGradini/IMG-20241119-WA0070.jpg" alt="Tehnologii de grădină">
+                            </a>
+                        </div>
+                        <!-- Add more images-->
                     </div>
                 </div>
             </div>
