@@ -1054,12 +1054,12 @@ function initializePortfolioPortofoliu() {
         });
     }
 }
-document.addEventListener("DOMContentLoaded", () => {
-    initializePortfolioPortofoliu();
-});
-window.addEventListener("load", () => {
-    initializePortfolioPortofoliu();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//     initializePortfolioPortofoliu();
+// });
+// window.addEventListener("load", () => {
+//     initializePortfolioPortofoliu();
+// });
 function initializePortofoliuScroll() {
     const isPortofoliuPage = document.body.classList.contains("portofoliu");
     if (isPortofoliuPage && window.matchMedia("(max-width: 991.98px)").matches) {
