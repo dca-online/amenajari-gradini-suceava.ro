@@ -1,0 +1,15 @@
+.portfolio-item {
+    margin-bottom: 30px; /* Adjust as needed */
+    overflow: hidden; /* Prevent overflow */
+}
+
+#portfolio-items {
+    overflow: visible; /* Allow images to show without scroll */
+    transition: height 0.3s ease; /* Smooth height transition */
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure images cover their container */
+}
