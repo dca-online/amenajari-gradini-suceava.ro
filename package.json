@@ -7,6 +7,8 @@
         "build": "echo 'No build step required'"
     },
     "dependencies": {
+        "@firebase/app-compat": "^0.2.48",
+        "@firebase/database-compat": "^2.0.2",
         "firebase": "^11.2.0",
         "proiectbeu": "file:"
     }
