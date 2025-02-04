@@ -34,6 +34,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "rewrites": [
+      { "source": "/acasa", "destination": "/index.html" },
+      { "source": "/despre-noi", "destination": "/despre.html" },
+      { "source": "/servicii", "destination": "/servicii.html" },
+      { "source": "/portofoliu", "destination": "/portofoliu.html" },
+      { "source": "/contact", "destination": "/contact.html" },
+      { "source": "/termeni-conditii", "destination": "/termeni-conditii.html" }
     ]
   }
 }
