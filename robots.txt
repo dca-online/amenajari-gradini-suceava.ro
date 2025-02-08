@@ -2,3 +2,5 @@ User-agent: *
 Disallow: /amenajari-gradini-suceava.ro/
 Disallow: /amenajarigradinisuceava.web.app/
 Disallow: /amenajarigradinisuceava.firebaseapp.com/
+
+Sitemap: https://amenajari-gradini-suceava.ro/sitemap.xml
