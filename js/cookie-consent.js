@@ -33,15 +33,15 @@ const modal=document.createElement("div");modal.className="cookie-consent-modal"
               <button class="cookie-btn save-settings-btn" onclick="saveSettings()">Salvează preferințele</button>
           </div>
       </div>
-    `;container.appendChild(trigger);container.appendChild(modal);document.body.appendChild(container)}
+    `;container.appendChild(trigger);container.appendChild(modal);document.body.appendChild(container)
+setTimeout(()=>{modal.classList.add("show")},100);if(window.innerWidth<=768){trigger.onclick=()=>{if(modal){modal.classList.toggle("show")}}}}
 function acceptAllCookies(){setCookie("cookieConsent","accepted",365);setCookie("cookieAnalytics","true",365);setCookie("cookieMarketing","true",365);hideCookieConsent();initializeCookieBasedFeatures(!0,!0)}
 function saveSettings(){const analytics=document.getElementById("analytics").checked;const marketing=document.getElementById("marketing").checked;setCookie("cookieConsent","customized",365);setCookie("cookieAnalytics",analytics.toString(),365);setCookie("cookieMarketing",marketing.toString(),365);hideCookieConsent();initializeCookieBasedFeatures(analytics,marketing)}
 function declineCookies(){setCookie("cookieConsent","declined",365);setCookie("cookieAnalytics","false",365);setCookie("cookieMarketing","false",365);hideCookieConsent();initializeCookieBasedFeatures(!1,!1)}
 function initializeCookieBasedFeatures(analytics,marketing){try{if(typeof window.firebase==="undefined"||!window.firebase.apps.length){console.log("Firebase not initialized yet");return}
 const app=window.firebase.app();const analyticsInstance=app.analytics();if(!analyticsInstance){console.log("Analytics instance not available");return}
 analyticsInstance.setAnalyticsCollectionEnabled(analytics);if(analytics){analyticsInstance.logEvent("cookie_consent_granted",{timestamp:Date.now(),marketing_consent:marketing})}}catch(error){console.log("Error initializing cookie-based features:",error)}}
-function hideCookieConsent(){const modal=document.querySelector(".cookie-consent-modal");const trigger=document.querySelector(".cookie-trigger");if(modal){modal.classList.add("hiding")}
-if(trigger){trigger.classList.remove("pulsing");trigger.classList.remove("hide");trigger.onclick=()=>{if(modal){modal.classList.remove("hiding");modal.classList.add("show")}}}}
+function hideCookieConsent(){const modal=document.querySelector(".cookie-consent-modal");const trigger=document.querySelector(".cookie-trigger");const container=modal?.parentElement;if(modal){modal.classList.add("hiding");modal.addEventListener("transitionend",()=>{container?.remove()},{once:!0})}}
 function setCookie(name,value,days){let expires="";if(days){const date=new Date();date.setTime(date.getTime()+days*24*60*60*1000);expires="; expires="+date.toUTCString()}
 document.cookie=name+"="+(value||"")+expires+"; path=/"}
 function getCookie(name){const nameEQ=name+"=";const ca=document.cookie.split(";");for(let i=0;i<ca.length;i++){let c=ca[i];while(c.charAt(0)===" ")c=c.substring(1,c.length);if(c.indexOf(nameEQ)===0)return c.substring(nameEQ.length,c.length);}
