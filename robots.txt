@@ -1,6 +1,19 @@
-User-agent: *
-Disallow: /amenajari-gradini-suceava.ro/
-Disallow: /amenajarigradinisuceava.web.app/
-Disallow: /amenajarigradinisuceava.firebaseapp.com/
-
 Sitemap: https://amenajari-gradini-suceava.ro/sitemap.xml
+
+User-agent: *
+Disallow: /amenajari-gradini-suceava/termeni-conditii/
+Disallow: /amenajari-gradini-suceava/politica-cookie/
+Disallow: /amenajari-gradini-suceava/CONTRACT.pdf
+Disallow: /CONTRACT.pdf
+
+User-agent: Googlebot
+Disallow: 
+
+User-agent: Googlebot-Image
+Disallow: 
+Allow: /
+
+User-agent: Bingbot
+Disallow:
+
+
